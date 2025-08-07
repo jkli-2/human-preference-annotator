@@ -1,0 +1,14 @@
+[
+  {
+    "pair_id": "001",
+    "left_clip": "videos/clip_0001.mp4",
+    "right_clip": "videos/clip_0002.mp4",
+    "description": "Ego vehicle is attempting to turn right"
+  },
+  {
+    "pair_id": "002",
+    "left_clip": "videos/clip_0003.mp4",
+    "right_clip": "videos/clip_0004.mp4",
+    "description": "Merging into highway traffic"
+  }
+]

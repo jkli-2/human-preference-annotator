@@ -1,0 +1,79 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+#videos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-timeline {
+  display: none !important;
+}
+
+video {
+  pointer-events: none;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+.video-container video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.progress-bar {
+  height: 4px;
+  background-color: #4caf50;
+  width: 0%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: width 0.2s linear;
+}
+
+#videoStatus {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  font-style: italic;
+  min-height: 1em;
+  transition: opacity 0.3s ease;
+}
+
+#buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#progress {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#description {
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+#instructions {
+  margin-bottom: 20px;
+  color: #555;
+}

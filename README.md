@@ -24,6 +24,7 @@ cd human-preference-annotator
 # Install backend dependencies
 cd backend
 npm install
+# Edit .env with your MongoDB URI
 
 # Start backend server
 npm run dev
@@ -31,3 +32,7 @@ npm run dev
 # Open frontend (use live-server or VS Code extension, or Python http.server)
 cd ../frontend
 python3 -m http.server 8000
+
+# To export annotation to JSON, visit
+localhost:3000/api/expxort
+```
