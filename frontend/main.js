@@ -1,5 +1,23 @@
 const urlParams = new URLSearchParams(window.location.search);
-const annotatorId = urlParams.get('id') || prompt('Enter your ID');
+let annotatorId = urlParams.get('id') || prompt('Enter your ID');
+localStorage.setItem('annotatorId', annotatorId);
+document.getElementById('annotatorIdDisplay').innerText = `Annotator ID: ${annotatorId}`;
+
+function logout() {
+  localStorage.removeItem('annotatorId');
+  window.location.href = window.location.pathname;
+}
+
+function goBack() {
+  if (historyStack.length > 1) {
+    historyStack.pop();
+    const previous = historyStack.pop();
+    currentPair = previous;
+    loadNextPair(true);
+  }
+}
+
+const historyStack = [];
 
 let currentPair = null;
 
@@ -19,7 +37,7 @@ function attachProgress(videoId, barId) {
   video.addEventListener('timeupdate', () => updateProgress(video, bar));
 }
 
-async function loadNextPair() {
+async function loadNextPair(backward = false) {
   const res = await fetch(`http://localhost:3000/api/clip-pairs?annotatorId=${annotatorId}`);
   const data = await res.json();
 
@@ -28,7 +46,8 @@ async function loadNextPair() {
     return;
   }
 
-  currentPair = data;
+  if (!backward) historyStack.push(data);
+  currentPair = backward ? historyStack.pop() : data;
 
   document.getElementById('leftVideo').src = currentPair.left_clip;
   document.getElementById('rightVideo').src = currentPair.right_clip;

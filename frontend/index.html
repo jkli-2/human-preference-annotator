@@ -5,12 +5,23 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div id="topbar">
+    <div id="topbar-left">
+      <span id="annotatorIdDisplay"></span>
+    </div>
+    <div id="topbar-center">
+      <span id="progress"></span>
+      <button id="goBackBtn" onclick="goBack()">Go Back</button>
+    </div>
+    <div id="topbar-right">
+      <button id="logoutBtn" onclick="logout()">Save & Log Out</button>
+    </div>
+  </div>
+
   <div id="app">
-    <h1>Driving Preference Annotation</h1>
     <p id="instructions">Please choose the driving behavior you prefer. If you are unsure, select "Can't Tell".</p>
-    <div id="progress"></div>
     <div id="description"></div>
-    <div id="videoStatus"></div>
+    <div id="videoStatus">&nbsp;</div>
     <div id="videos">
       <div class="video-container">
         <video id="leftVideo" muted autoplay loop playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
