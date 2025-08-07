@@ -2,6 +2,10 @@
 
 A lightweight web-based tool for collecting human preference labels on driving behavior. Annotators are shown two short video clips of driving scenarios side by side and asked to choose which one they prefer or indicate if they can't tell.
 
+<p align="center">
+  <img src="assets/images/annotate_ui.png">
+</p>
+
 Designed for crowdsourced studies or in-lab annotation, with static frontend + serverless-ready backend architecture.
 
 ---
