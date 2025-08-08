@@ -33,6 +33,12 @@ npm install
 # Start backend server
 npm run dev
 
+# To generate token for an annotator, change dir to backend and run
+node generate_token.js
+
+# To delete all records, change dir to backend and run
+node flush_db.js
+
 # Open frontend (use live-server or VS Code extension, or Python http.server)
 cd ../frontend
 python3 -m http.server 8000

@@ -75,7 +75,7 @@ video {
 
 #description {
   margin-bottom: 10px;
-  font-style: italic;
+  /* font-style: italic; */
 }
 
 #instructions {
