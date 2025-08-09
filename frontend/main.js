@@ -87,7 +87,7 @@ async function loadNextPair() {
 }
 
 async function submitResponse(response) {
-    await fetch("${API_BASE}/annotate", {
+    await fetch(`${API_BASE}/annotate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, pairId: currentPair.pair_id, response }),

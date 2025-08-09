@@ -72,7 +72,7 @@ vite.config.ts.timestamp-*
 !.env.example
 
 # Project-specific
-frontend/videos/
+# frontend/videos/
 annotations.json
 
 # Editor / OS Trash
