@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: human-preference-api
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      # - key: CORS_ORIGIN         # optional if you want to read from process.env
+      #   value: https://<username>.github.io/<repo-name>/

@@ -16,7 +16,14 @@ if (!process.env.ADMIN_TOKEN) {
 
 const apiRoutes = require("./routes/api");
 const app = express();
-app.use(cors());
+
+const allowed = [
+  'https://jkli-2.github.io',
+  'https://jkli-2.github.io/human-preference-annotator/',
+  'http://localhost',
+];
+// app.use(cors());
+app.use(cors({ origin: (o, cb) => cb(null, !o || allowed.some(a => o.startsWith(a))), credentials: true }));
 app.use(express.json());
 
 mongoose
@@ -30,3 +37,5 @@ app.use("/api", apiRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.get('/healthz', (req, res) => res.send('ok'));

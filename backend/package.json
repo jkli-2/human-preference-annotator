@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4",
+    "cors": "^2",
+    "mongoose": "^8"
+  }
+}
