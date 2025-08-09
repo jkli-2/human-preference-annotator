@@ -1,3 +1,4 @@
+const API_BASE = "https://human-preference-api.onrender.com/api";
 const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get("token");
 if (!token) {
@@ -65,7 +66,7 @@ function renderPair(pair) {
 }
 
 async function loadNextPair() {
-    const res = await fetch(`http://localhost:3000/api/clip-pairs?token=${token}`);
+    const res = await fetch(`${API_BASE}/clip-pairs?token=${token}`);
     if (!res.ok) {
         if (res.status === 403) {
             document.getElementById("app").innerHTML =
@@ -86,7 +87,7 @@ async function loadNextPair() {
 }
 
 async function submitResponse(response) {
-    await fetch("http://localhost:3000/api/annotate", {
+    await fetch("${API_BASE}/annotate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, pairId: currentPair.pair_id, response }),
