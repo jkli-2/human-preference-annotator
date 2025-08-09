@@ -17,10 +17,6 @@
       <button id="logoutBtn" onclick="logout()">Save & Log Out</button>
     </div>
   </div>
-    <p id="instructions">Please choose the driving behavior you prefer. If you are unsure, select "Can't Tell".</p>
-    <p id="finalNote" style="text-align: center; margin-top: 1em; font-style: italic; color: #555;">
-      All decisions are final. Please choose carefully.
-    </p>
     <div id="description"></div>
     <div id="videoStatus">&nbsp;</div>
     <div id="videos">
@@ -38,6 +34,11 @@
       <button onclick="submitResponse('right')">Prefer Right</button>
       <button onclick="submitResponse('cant_tell')">Can't Tell</button>
     </div>
+    <p id="instructions">Please choose the driving behavior you prefer.</p>
+    <p id="instructions">If you are unsure, select "Can't Tell".</p>
+    <p id="finalNote" style="text-align: center; margin-top: 1em; font-style: italic; color: #555;">
+      All decisions are final. Please choose carefully.
+    </p>
   </div>
   <script src="main.js"></script>
 </body>

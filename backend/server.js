@@ -2,10 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const apiRoutes = require("./routes/api");
-
 dotenv.config({ path: __dirname + "/.env" });
 
+if (!process.env.ADMIN_PASSWORD) {
+    console.error("Missing ADMIN_PASSWORD in environment variables.");
+    process.exit(1);
+}
+
+if (!process.env.ADMIN_TOKEN) {
+  console.error("Missing ADMIN_TOKEN in environment variables.");
+  process.exit(1);
+}
+
+const apiRoutes = require("./routes/api");
 const app = express();
 app.use(cors());
 app.use(express.json());

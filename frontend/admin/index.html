@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
+    h2 { margin-top: 0; }
+    section { margin: 24px 0; }
+    input, button { padding: 6px 10px; margin: 4px 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .danger { background:#ffecec; border:1px solid #f5a5a5; padding:10px; }
+    .success { color: #2e7d32; font-weight: 600; }
+    .muted { color: #666; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h2>Annotation Admin Dashboard</h2>
+
+  <section id="loginSection">
+    <div class="row">
+      <label>Password: <input type="password" id="adminPassword"></label>
+      <button id="loginBtn">Login</button>
+      <span id="loginMsg" class="muted"></span>
+    </div>
+  </section>
+
+  <section id="dash" style="display:none">
+    <section>
+      <h3>Annotator Progress</h3>
+      <div class="row">
+        <button id="refreshProgressBtn">Refresh</button>
+        <span id="progressMsg" class="muted"></span>
+      </div>
+      <table id="progressTable">
+        <thead><tr><th>Annotator ID</th><th>Completed</th><th>Total</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Tokens (Annotator ID → Token)</h3>
+      <div class="row">
+        <button id="refreshTokensBtn">Refresh</button>
+        <span id="tokensMsg" class="muted"></span>
+      </div>
+      <table id="tokensTable">
+        <thead><tr><th>Annotator ID</th><th>Token</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Add Annotator</h3>
+      <div class="row">
+        <input id="newAnnotatorId" placeholder="Annotator ID" />
+        <button id="addAnnotatorBtn">Add (Generate Token)</button>
+        <span id="addAnnotatorMsg" class="muted"></span>
+      </div>
+      <div id="generatedToken" class="success"></div>
+    </section>
+
+    <!-- <section>
+      <h3>Remove Annotator / Token</h3>
+      <div class="row">
+        <input id="removeAnnotatorId" placeholder="Annotator ID (optional)" />
+        <input id="removeToken" placeholder="Token (optional)" />
+        <button id="removeAnnotatorBtn">Remove</button>
+        <span class="muted">Specify either annotatorId or token.</span>
+      </div>
+      <div class="muted">Tip: you can also remove directly from the table.</div>
+    </section> -->
+
+    <section class="danger">
+      <h3>Data Reset</h3>
+      <button id="flushBtn">Flush Database (ALL DATA)</button>
+    </section>
+
+    <section>
+      <h3>Export Annotations</h3>
+      <button id="downloadBtn">Download JSON</button>
+    </section>
+  </section>
+
+  <script src="admin.js"></script>
+</body>
+</html>

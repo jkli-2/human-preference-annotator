@@ -8,7 +8,8 @@ body {
   display: flex;
   justify-content: center;
   gap: 40px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   margin: 20px 0;
 }
 
@@ -28,7 +29,8 @@ video {
 .video-container {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  min-width: 240px;
+  max-width: 50vw;
 }
 
 .video-container video {
@@ -74,6 +76,7 @@ video {
 }
 
 #description {
+  margin-top: 40px;
   margin-bottom: 10px;
   /* font-style: italic; */
 }
