@@ -22,10 +22,11 @@ let annotatorId = "";
 function updateProgress(video, bar) {
     const percentage = (video.currentTime / video.duration) * 100;
     bar.style.width = `${percentage}%`;
-    if (percentage > 85) {
-        document.getElementById("videoStatus").innerText = "Video Replaying...";
+    const vidProgressElm = document.getElementById("videoStatus");
+    if (vidProgressElm && percentage > 85) {
+        vidProgressElm.innerText = "Video Replaying...";
     } else {
-        document.getElementById("videoStatus").innerText = "\u00A0";
+        vidProgressElm.innerText = "\u00A0";
     }
 }
 
