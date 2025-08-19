@@ -1,5 +1,5 @@
-// const API_BASE = "http://localhost:3000/api";
-const API_BASE = "https://human-preference-api.onrender.com/api";
+const API_BASE = "http://localhost:3000/api";
+// const API_BASE = "https://human-preference-api.onrender.com/api";
 let adminToken = "";
 
 const loginBtn = document.getElementById("loginBtn");
@@ -91,24 +91,43 @@ async function fetchTokens() {
       <td><code>${r.token}</code></td>
       <td>
         <button data-token="${r.token}" class="removeByToken">Remove</button>
+        <button data-token="${r.token}" class="copyURL">Copy URL</button>
+        <button data-token="${r.token}" class="openURL">Open</button>
       </td>`;
         tokensTbody.appendChild(tr);
     });
 
-    // tokensTbody
-    //     .querySelectorAll(".removeById")
-    //     .forEach((btn) =>
-    //         btn.addEventListener("click", () => removeAnnotator({ annotatorId: btn.dataset.id }))
-    //     );
     tokensTbody
         .querySelectorAll(".removeByToken")
         .forEach((btn) =>
             btn.addEventListener("click", () => removeAnnotator({ token: btn.dataset.token }))
         );
+    tokensTbody
+        .querySelectorAll(".copyURL")
+        .forEach((btn) =>
+            btn.addEventListener("click", () => {
+                const token = btn.dataset.token;
+                const url = `${window.location.origin}/?token=${encodeURIComponent(token)}`;
+                navigator.clipboard.writeText(url).then(() => {
+                    console.log(`Copied: ${url}`);
+                }).catch(err => {
+                    console.error("Failed to copy URL:", err);
+                });
+            })
+        );
+        tokensTbody
+        .querySelectorAll(".openURL")
+        .forEach((btn) =>
+            btn.addEventListener("click", () => {
+                const token = btn.dataset.token;
+                const url = `${window.location.origin}/?token=${encodeURIComponent(token)}`;
+                window.open(url, "_blank");
+            })
+        );
     // tokensTbody
-    //     .querySelectorAll(".copyToken")
+    //     .querySelectorAll(".removeById")
     //     .forEach((btn) =>
-    //         btn.addEventListener("click", () => navigator.clipboard.writeText(btn.dataset.token))
+    //         btn.addEventListener("click", () => removeAnnotator({ annotatorId: btn.dataset.id }))
     //     );
 
     if (tokensMsg) tokensMsg.textContent = `Loaded ${rows.length}`;
