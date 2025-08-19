@@ -1,15 +1,22 @@
 const mongoose = require('mongoose');
 
+const AttentionSchema = new mongoose.Schema({
+    side: { type: String, enum: ["left","right"] },
+    gridIndex: Number,        // 1..9
+    row: Number, col: Number, // 0..2
+    rect: {                   // normalized to [0,1] in video coords
+        x: Number, y: Number, w: Number, h: Number
+    },
+    decisionAtMs: Number
+}, { _id: false });
+
 const AnnotationSchema = new mongoose.Schema({
     annotatorId: String,
     pairId: String,
     response: { type: String, enum: ["left", "right", "cant_tell"], required: true },
-    left: {
-    url: String,
-    },
-    right: {
-    url: String,
-    },
+    left: { url: String },
+    right: { url: String },
+    attention: AttentionSchema,
     isGold: { type: Boolean, default: false },
     goldExpected: { type: String, enum: ["left", "right"], required: function(){ return this.isGold; } },
     goldCorrect: { type: Boolean },
