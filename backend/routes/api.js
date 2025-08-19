@@ -7,6 +7,13 @@ const Annotation = require("../models/Annotation");
 
 const clipPairsPath = path.join(__dirname, "../data/clip_pairs.json");
 const tokenPath = path.join(__dirname, "../data/tokens.json");
+const goldPairsPath = path.join(__dirname, "../data/gold_pairs.json");
+
+// ======= Gold/Repeat configuration =======
+const GOLD_RATE = 0.07;         // 7% of trials are gold
+const REPEAT_GAP = 10;          // schedule a repeat 10 trials after first seen
+const REPEAT_RATE = 0.05;       // enqueue repeats for 5% of seen items
+const MAX_REPEAT_QUEUE = 5;     // cap queue size
 
 function getAnnotatorIdFromToken(token) {
     const tokens = loadTokens();
@@ -64,11 +71,20 @@ router.get('/admin/tokens', requireAdmin, (req, res) => {
 
 router.get("/admin/export", requireAdmin, async (req, res) => {
     const annotations = await Annotation.find({});
-    const output = annotations.map(({ annotatorId, pairId, response, timestamp }) => ({
-        annotator_id: annotatorId,
-        pair_id: pairId,
-        response,
-        timestamp,
+    const output = annotations.map(a => ({
+        annotator_id: a.annotatorId,
+        pair_id: a.pairId,
+        response: a.response,
+        left_url:  a.left?.url || null,
+        right_url: a.right?.url || null,
+        is_gold: a.isGold || false,
+        gold_expected: a.goldExpected || null,
+        gold_correct: (typeof a.goldCorrect === 'boolean') ? a.goldCorrect : null,
+        is_repeat: a.isRepeat || false,
+        repeat_of: a.repeatOf || null,
+        presented_time: a.presentedTime || null,
+        response_time_ms: (typeof a.responseTimeMs === 'number') ? a.responseTimeMs : null,
+        timestamp: a.timestamp,
     }));
     res.json(output);
 });
@@ -118,12 +134,46 @@ router.get("/clip-pairs", async (req, res) => {
     if (!annotatorId) return res.status(403).json({ error: "Invalid token" });
 
     const clipPairs = JSON.parse(fs.readFileSync(clipPairsPath));
+    const goldPairs = JSON.parse(fs.readFileSync(goldPairsPath));
     let annotator = await Annotator.findOne({ annotatorId });
-    if (!annotator) annotator = await Annotator.create({ annotatorId, completedPairs: [] });
-    const nextPair = clipPairs.find((p) => !annotator.completedPairs.includes(p.pair_id));
+    if (!annotator) annotator = await Annotator.create({ annotatorId, completedPairs: [], completedCount: 0, seenGold: [], repeatQueue: [] });
+
+    // 1) Serve due repeat if any
+    const dueIdx = annotator.repeatQueue.findIndex(item => (annotator.completedCount >= item.targetAtCount));
+    if (dueIdx >= 0) {
+        const { pairId } = annotator.repeatQueue.splice(dueIdx, 1)[0];
+        await annotator.save();
+        const base = clipPairs.find(p => p.pair_id === pairId);
+        if (base) {
+            const progress = {
+                annotatorId: annotator.annotatorId,
+                completed: annotator.completedCount,
+                total: clipPairs.length
+            };
+            return res.json({ ...base, progress, _meta: { isRepeat: true, repeatOf: pairId } });
+        }
+    }
+
+    // 2) Maybe serve a gold (that this annotator hasn't seen)
+    const unseenGolds = goldPairs.filter(g => !annotator.seenGold.includes(g.pair_id));
+    if (unseenGolds.length && Math.random() < GOLD_RATE) {
+        const g = unseenGolds[Math.floor(Math.random() * unseenGolds.length)];
+        const progress = {
+            annotatorId: annotator.annotatorId,
+            completed: annotator.completedCount,
+            total: clipPairs.length
+        };
+        // mark as seen (persist)
+        annotator.seenGold.push(g.pair_id);
+        await annotator.save();
+        return res.json({ ...g, progress, _meta: { isGold: true, expected: g.expected } });
+    }
+
+   // 3) Serve next new pair
+    const nextPair = clipPairs.find(p => !annotator.completedPairs.includes(p.pair_id));
     const progress = {
         annotatorId: annotator.annotatorId,
-        completed: annotator.completedPairs.length,
+        completed: annotator.completedCount,
         total: clipPairs.length,
     };
     res.json(nextPair ? { ...nextPair, progress } : null);
@@ -133,10 +183,63 @@ router.post("/annotate", async (req, res) => {
     const token = req.body.token;
     const annotatorId = getAnnotatorIdFromToken(token);
     if (!annotatorId) return res.status(403).json({ error: "Invalid token" });
+    const { pairId, response, left, right, presentedTime, responseTimeMs } = req.body;
+    
+    const goldPairs = JSON.parse(fs.readFileSync(goldPairsPath));
+    const isGold = !!goldPairs.find(g => g.pair_id === pairId);
 
-    const { pairId, response } = req.body;
-    await Annotation.create({ annotatorId, pairId, response });
-    await Annotator.updateOne({ annotatorId }, { $addToSet: { completedPairs: pairId } });
+    const annotator = await Annotator.findOne({ annotatorId });
+    const isRepeat = !isGold && annotator.completedPairs.includes(pairId);
+    const repeatOf = isRepeat ? pairId : undefined;
+
+    let computedRt;
+    if (presentedTime) {
+        const p = new Date(presentedTime).getTime();
+        if (!Number.isNaN(p)) computedRt = Date.now() - p;
+    }
+    // For golds, compute correctness
+    let goldExpected, goldCorrect;
+    if (isGold) {
+        const g = goldPairs.find(g => g.pair_id === pairId);
+        goldExpected = g?.expected;
+        goldCorrect = (response === goldExpected);
+    }
+    try {
+      await Annotation.create({
+        annotatorId,
+        pairId,
+        response,
+        left:  { url: left?.url },
+        right: { url: right?.url },
+        presentedTime: presentedTime ? new Date(presentedTime) : undefined,
+        responseTimeMs: Number.isFinite(responseTimeMs) ? responseTimeMs : computedRt,
+        isGold,
+        goldExpected,
+        goldCorrect,
+        isRepeat,
+        repeatOf
+      });
+    } catch (err) {
+      if (err && err.code === 11000) {
+        return res.status(409).json({ error: "Already annotated this original pair" });
+      }
+      throw err;
+    }
+
+    if (!isGold && !isRepeat) {
+        // Count only new (non-gold, non-repeat) towards progress
+        if (!annotator.completedPairs.includes(pairId)) {
+            annotator.completedPairs.push(pairId);
+            annotator.completedCount += 1;
+            if (Math.random() < REPEAT_RATE && annotator.repeatQueue.length < MAX_REPEAT_QUEUE) {
+            annotator.repeatQueue.push({
+                pairId,
+                targetAtCount: annotator.completedCount + REPEAT_GAP
+            });
+            }
+        }
+        await annotator.save();
+    }
     res.sendStatus(200);
 });
 

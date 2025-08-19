@@ -19,6 +19,7 @@ function logout() {
 
 let currentPair = null;
 let annotatorId = "";
+let presentedTime = null;
 
 function updateProgress(video, bar) {
     const percentage = (video.currentTime / video.duration) * 100;
@@ -37,34 +38,88 @@ function attachProgress(videoId, barId) {
     video.addEventListener("timeupdate", () => updateProgress(video, bar));
 }
 
+function showStartOverlay(onStart) {
+  let overlay = document.getElementById('startOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'startOverlay';
+    overlay.style = 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);z-index:9999;cursor:pointer;';
+    overlay.innerHTML = '<div style="padding:12px 16px;background:#fff;border-radius:8px;font:600 14px system-ui;">Click or press Space to start playback</div>';
+    document.body.appendChild(overlay);
+  }
+  const start = () => {
+    overlay.removeEventListener('click', start);
+    window.removeEventListener('keydown', onKey);
+    overlay.remove();
+    onStart();
+  };
+  const onKey = (e) => {
+    if (e.key === ' ' || e.code === 'Space' || e.key === 'Spacebar') {
+      e.preventDefault();
+      start();
+    }
+  };
+  overlay.addEventListener('click', start, { once: true });
+  window.addEventListener('keydown', onKey, { once: true });
+}
+
 function renderPair(pair) {
-  currentPair = pair;
-  annotatorId = pair.progress?.annotatorId || 'anonymous';
-  document.getElementById('annotatorIdDisplay').innerText = `Annotator ID: ${annotatorId}`;
+    currentPair = pair;
+    annotatorId = pair.progress?.annotatorId || 'anonymous';
+    document.getElementById('annotatorIdDisplay').innerText = `Annotator ID: ${annotatorId}`;
 
-  document.getElementById('leftVideo').src = pair.left_clip;
-  document.getElementById('rightVideo').src = pair.right_clip;
+    document.getElementById('description').innerText = `Task: ${pair.description}`+
+    (pair._meta?.isGold ? "  (GOLD)" : "") +
+    (pair._meta?.isRepeat ? "  (REPEAT)" : "");
+    document.getElementById('progress').innerText = `Progress: ${pair.progress.completed}/${pair.progress.total} pairs`;
 
-  document.getElementById('description').innerText = `Task: ${pair.description}`;
-  document.getElementById('progress').innerText = `Progress: ${pair.progress.completed}/${pair.progress.total} pairs`;
+    const leftVideo = document.getElementById('leftVideo');
+    const rightVideo = document.getElementById('rightVideo');
 
-  const leftVideo = document.getElementById('leftVideo');
-  const rightVideo = document.getElementById('rightVideo');
+    // autoplay setup
+    leftVideo.muted = true;
+    rightVideo.muted = true;
+    leftVideo.setAttribute('muted', '');
+    rightVideo.setAttribute('muted', '');
+    leftVideo.setAttribute('playsinline', '');
+    rightVideo.setAttribute('playsinline', '');
+    leftVideo.autoplay = true;
+    rightVideo.autoplay = true;
+    leftVideo.preload = 'auto';
+    rightVideo.preload = 'auto';
 
-  leftVideo.load();
-  rightVideo.load();
+    leftVideo.src = pair.left_clip;
+    rightVideo.src = pair.right_clip;
 
-  leftVideo.oncanplay = () => {
-    if (rightVideo.readyState >= 3) { leftVideo.play(); rightVideo.play(); }
-  };
-  rightVideo.oncanplay = () => {
-    if (leftVideo.readyState >= 3) { leftVideo.play(); rightVideo.play(); }
-  };
+    leftVideo.load();
+    rightVideo.load();
 
-  leftVideo.loop = true;
-  rightVideo.loop = true;
-  leftVideo.controls = true;
-  rightVideo.controls = true;
+    // try autoplay. If blocked, show overlay and start on user gesture.
+    const tryAutoplay = async () => {
+      try {
+        await Promise.all([leftVideo.play(), rightVideo.play()]);
+        presentedTime = new Date();
+      } catch (e) {
+        showStartOverlay(async () => {
+            await Promise.allSettled([leftVideo.play(), rightVideo.play()]);
+            presentedTime = new Date();
+        });
+      }
+    };
+    const maybeStart = () => {
+      if (leftVideo.readyState >= 3 && rightVideo.readyState >= 3) {
+        tryAutoplay();
+        leftVideo.removeEventListener('canplay', maybeStart);
+        rightVideo.removeEventListener('canplay', maybeStart);
+      }
+    };
+    leftVideo.addEventListener('canplay', maybeStart);
+    rightVideo.addEventListener('canplay', maybeStart);
+
+    leftVideo.loop = true;
+    rightVideo.loop = true;
+    leftVideo.controls = true;
+    rightVideo.controls = true;
 }
 
 async function loadNextPair() {
@@ -89,10 +144,23 @@ async function loadNextPair() {
 }
 
 async function submitResponse(response) {
+    const now = new Date();
+    const responseTimeMs = presentedTime ? (now - presentedTime) : undefined;
     await fetch(`${API_BASE}/annotate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, pairId: currentPair.pair_id, response }),
+        body: JSON.stringify({
+            token,
+            pairId: currentPair.pair_id,
+            response,
+            left:  { url: currentPair.left_clip  },
+            right: { url: currentPair.right_clip },
+            presentedTime,
+            responseTimeMs,
+            isGold: currentPair._meta?.isGold || false,
+            isRepeat: currentPair._meta?.isRepeat || false,
+            repeatOf: currentPair._meta?.repeatOf
+        }),
     });
     loadNextPair();
 }
@@ -103,7 +171,7 @@ window.onload = () => {
     attachProgress("rightVideo", "rightProgress");
 };
 
-// Keyboard shortcuts: ← prefer left, → prefer right
+// Keyboard shortcuts: LEFT prefer left, RIGHT prefer right, DOWN means can't tell
 (function setupKeyboardShortcuts() {
   const isTextInput = el =>
     el &&
@@ -121,6 +189,9 @@ window.onload = () => {
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
       if (typeof submitResponse === 'function') submitResponse('right');
+    }  else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (typeof submitResponse === 'function') submitResponse('cant_tell');
     }
   }, { passive: false });
 })();

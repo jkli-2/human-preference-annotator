@@ -1,0 +1,9 @@
+[
+  {
+    "pair_id": "g001",
+    "left_clip": "videos/gold/ego_video.mp4",
+    "right_clip": "videos/gold/ego_video.mp4",
+    "expected": "left",
+    "description": "gold: good vs bad"
+  }
+]
