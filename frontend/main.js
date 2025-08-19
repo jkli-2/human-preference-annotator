@@ -1,4 +1,5 @@
-const API_BASE = "https://human-preference-api.onrender.com/api";
+const API_BASE = "http://localhost:3000/api";
+// const API_BASE = "https://human-preference-api.onrender.com/api";
 const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get("token");
 if (!token) {
@@ -101,3 +102,25 @@ window.onload = () => {
     attachProgress("leftVideo", "leftProgress");
     attachProgress("rightVideo", "rightProgress");
 };
+
+// Keyboard shortcuts: ← prefer left, → prefer right
+(function setupKeyboardShortcuts() {
+  const isTextInput = el =>
+    el &&
+    (el.tagName === 'INPUT' ||
+     el.tagName === 'TEXTAREA' ||
+     el.isContentEditable);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.repeat) return;
+    if (isTextInput(document.activeElement) || e.isComposing) return;
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (typeof submitResponse === 'function') submitResponse('left');
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      if (typeof submitResponse === 'function') submitResponse('right');
+    }
+  }, { passive: false });
+})();
