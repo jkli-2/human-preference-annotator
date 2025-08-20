@@ -7,6 +7,7 @@ if (!token) {
     throw new Error("Missing token");
 }
 localStorage.setItem("token", token);
+const ATTN_TIMEOUT = 10000 // 10s
 
 let reviewMode = false;
 let completedPairs = [];
@@ -174,11 +175,11 @@ function showGridOverlay(side, onPick) {
         }, { once: true });
         overlay.appendChild(cell);
     }
-    // Failsafe: auto-submit after 1.2s if no pick
+    // Failsafe: auto-submit after set time
     regionTimeoutId = setTimeout(() => {
         overlay.remove();
         onPick(null);
-    }, 1200);
+    }, ATTN_TIMEOUT);
 }
 
 function handleChoice(response) {
@@ -278,13 +279,13 @@ window.onload = () => {
     // If overlay is up, capture 1..9 as region pick
     if (awaitingRegion) {
         if (e.key >= '1' && e.key <= '9') {
-        e.preventDefault();
-        const idx = parseInt(e.key, 10);
-        const { row, col, rect } = mapGridIndex(idx);
-        const attention = { side: pendingChoice, gridIndex: idx, row, col, rect, decisionAtMs };
-        awaitingRegion = false;
-        if (regionTimeoutId) { clearTimeout(regionTimeoutId); regionTimeoutId = null; }
-        submitResponse(pendingChoice, attention);
+            e.preventDefault();
+            const idx = parseInt(e.key, 10);
+            const { row, col, rect } = mapGridIndex(idx);
+            const attention = { side: pendingChoice, gridIndex: idx, row, col, rect, decisionAtMs };
+            awaitingRegion = false;
+            if (regionTimeoutId) { clearTimeout(regionTimeoutId); regionTimeoutId = null; }
+            submitResponse(pendingChoice, attention);
         }
         return;
     }
