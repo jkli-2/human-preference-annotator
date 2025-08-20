@@ -107,7 +107,8 @@ async function fetchTokens() {
         .forEach((btn) =>
             btn.addEventListener("click", () => {
                 const token = btn.dataset.token;
-                const url = `${window.location.origin}/?token=${encodeURIComponent(token)}`;
+                let basePath = window.location.pathname.replace(/\/admin\/?$/, "/");
+                const url = `${window.location.origin}${basePath}?token=${encodeURIComponent(token)}`;
                 navigator.clipboard.writeText(url).then(() => {
                     console.log(`Copied: ${url}`);
                 }).catch(err => {
@@ -115,15 +116,16 @@ async function fetchTokens() {
                 });
             })
         );
-        tokensTbody
-        .querySelectorAll(".openURL")
-        .forEach((btn) =>
-            btn.addEventListener("click", () => {
-                const token = btn.dataset.token;
-                const url = `${window.location.origin}/?token=${encodeURIComponent(token)}`;
-                window.open(url, "_blank");
-            })
-        );
+    tokensTbody
+    .querySelectorAll(".openURL")
+    .forEach((btn) =>
+        btn.addEventListener("click", () => {
+            const token = btn.dataset.token;
+            let basePath = window.location.pathname.replace(/\/admin\/?$/, "/");
+            const url = `${window.location.origin}${basePath}?token=${encodeURIComponent(token)}`;
+            window.open(url, "_blank");
+        })
+    );
     // tokensTbody
     //     .querySelectorAll(".removeById")
     //     .forEach((btn) =>
