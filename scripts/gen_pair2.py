@@ -4,22 +4,6 @@ pair_clips.py — walk a directory, pair video clips by common prefix and agent,
 
 Filename assumptions (customisable via regex below):
   <prefix>__<scenario>__tpre...tpost...__agent<NUM>_<ROUTE>.mp4
-
-Examples:
-  ckpt_11833344_..._collisions_vehicle__tpre2_tpost2__agent1_552.mp4
-  ckpt_11833344_..._collisions_vehicle__tpre2_tpost2__agent2_552.mp4
-
-Default behaviour:
-- Group by 'base_key' = everything before the first "__agent"
-- Extract agent as "agent<digits>"
-- Extract route id as digits after agent
-- Extract scenario from the segment immediately before the first "__tpre" or "__tpost"
-- Only pair files from different agents; by default requires SAME route id (can disable with --no-require-same-route)
-
-Usage:
-  python pair_clips.py /path/to/root --out generated_clip_pairs.json
-  python pair_clips.py . --out pairs.json --no-require-same-route
-  python pair_clips.py /data --out pairs.json --abs-paths
 """
 
 import argparse
@@ -35,6 +19,35 @@ RE_ROUTE = re.compile(r"__agent\d+_(\d+)$")
 # Scenario: take the chunk right before __tpre / __tpost, then grab its trailing alpha/underscore run
 RE_TBLOCK = re.compile(r"__(tpre|tpost)", re.IGNORECASE)
 RE_SCENARIO_TAIL = re.compile(r"([A-Za-z]+(?:_[A-Za-z]+)*)$")
+
+def extract_grouping_key_from_stem(stem: str) -> str | None:
+    """
+    Returns grouping key: everything before '__agent' including a trailing '__'.
+    If no '__agent' token exists, returns None.
+    """
+    parts = stem.split("__agent", 1)
+    if len(parts) < 2:
+        return None
+    # Include the trailing '__' to mirror the behaviour of your updated logic
+    return parts[0] + "__"
+
+def count_pairs_and_non_paired_groups_for_two_agents(group_map: dict) -> tuple[int, list[str]]:
+    """
+    Emulates your updated snippet's summary across agent1 and agent2 only.
+    group_map: {group_key: { agent: [(route, path, scenario), ...], ... }, ...}
+    """
+    total_pairs = 0
+    non_paired_groups = []
+
+    for group_key, agents in group_map.items():
+        a1_count = len(agents.get("agent1", []))
+        a2_count = len(agents.get("agent2", []))
+        if a1_count > 0 and a2_count > 0:
+            total_pairs += a1_count * a2_count
+        else:
+            non_paired_groups.append(group_key)
+
+    return total_pairs, non_paired_groups
 
 def parse_filename(basename: str):
     """
@@ -54,7 +67,7 @@ def parse_filename(basename: str):
     route = m_route.group(1) if m_route else None
 
     # base key
-    base_key = stem.split("__agent")[0] if m_agent else None
+    base_key = extract_grouping_key_from_stem(stem) if m_agent else None
 
     # scenario
     scenario = None
@@ -91,6 +104,8 @@ def main():
     ap.add_argument("--no-require-same-route", action="store_true",
                     help="Pair across agents even if the route ids differ")
     ap.add_argument("--pretty", action="store_true", help="Pretty-print JSON with indentation")
+    ap.add_argument("--report-nonpaired", action="store_true",
+                    help="Also print a summary of total one-to-one pairs and non-paired groups (agent1 vs agent2).")
     args = ap.parse_args()
 
     root = Path(args.root).expanduser().resolve()
@@ -98,7 +113,7 @@ def main():
         raise SystemExit(f"Root path does not exist: {root}")
 
     # Group structure: {(base_key): {agent: [(route, path, scenario), ...]}}
-    groups = defaultdict(lambda: defaultdict(list))
+    groups: dict[str, dict[str, list[tuple[str | None, str, str | None]]]] = defaultdict(lambda: defaultdict(list))
 
     total = 0
     skipped = 0
@@ -108,17 +123,25 @@ def main():
         if not (base_key and agent):
             skipped += 1
             continue
-        # path_str = str(p.resolve() if args.abs_paths else p.relative_to(root))
         if args.abs_paths:
             path_str = str(p.resolve())
         else:
-            rel = p.relative_to(root)  # e.g. "scenario/file.mp4"
-            if args.prefix:
-                path_str = str(Path(args.prefix) / rel)  # prepend your prefix
-            else:
-                path_str = str(rel)
+            rel = p.relative_to(root)
+            path_str = str(Path(args.prefix) / rel) if args.prefix else str(rel)
         groups[base_key][agent].append((route, path_str, scenario))
 
+    # summary
+    if args.report_nonpaired:
+        total_pairs_like_core, non_paired_groups = count_pairs_and_non_paired_groups_for_two_agents(groups)
+        print(f"Total one-to-one pairs (agent1 x agent2, regardless of route): {total_pairs_like_core}")
+        if non_paired_groups:
+            print("Non-paired groups (only one of agent1/agent2 present):")
+            for gk in non_paired_groups:
+                print(f"  - {gk}")
+        else:
+            print("All groups have both agent1 and agent2.")
+
+    # Build pairs.json (existing behaviour preserved)
     pairs = []
     pair_counter = 1
 

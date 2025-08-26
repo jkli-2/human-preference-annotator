@@ -1,0 +1,38 @@
+[
+  {
+    "pair_id": "000001",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_collisions_vehicle__tpre2_tpost2__agent1_19.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000002",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_vehicle_blocked__tpre2_tpost2__agent1_19.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000003",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_04_14_ckpt_4866048.pth_08_23_14_46_09_red_light__tpre2_tpost2__agent1_168.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_04_14_ckpt_4866048.pth_08_23_14_46_09_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000004",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent1_19.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000005",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent1_19.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000006",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_46_09_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent1_168.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_46_09_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  }
+]
