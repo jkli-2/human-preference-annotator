@@ -9,10 +9,6 @@ if (!token) {
 localStorage.setItem("token", token);
 const ATTN_TIMEOUT = 10000 // 10s
 
-let reviewMode = false;
-let completedPairs = [];
-let reviewIndex = 0;
-
 function logout() {
     localStorage.removeItem("token");
     window.location.href = window.location.pathname;
