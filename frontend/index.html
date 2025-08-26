@@ -30,16 +30,16 @@
       </div>
     </div>
     <div id="buttons">
-      <button onclick="submitResponse('left')">Prefer Left</button>
-      <button onclick="submitResponse('right')">Prefer Right</button>
+      <button onclick="submitResponse('left')">Prefer Up</button>
+      <button onclick="submitResponse('right')">Prefer Down</button>
       <button onclick="submitResponse('cant_tell')">Can't Tell</button>
     </div>
-    <p id="instructions">Please choose the driving behavior you prefer.</p>
-    <p id="instructions">If you are unsure, select "Can't Tell".</p>
-    <p id="instructions">For any video playback problem, please refresh the page.</p>
-    <p id="finalNote" style="text-align: center; margin-top: 1em; font-style: italic; color: #555;">
-      All decisions are final. Please choose carefully.
-    </p>
+    <div id="notes">
+      <p id="instructions">Please choose the driving behavior you prefer.</p>
+      <p id="instructions">If you are unsure, select "Can't Tell".</p>
+      <p id="instructions">For any video playback problem, please refresh the page.</p>
+      <p id="instructions">All decisions are final. Please choose carefully.</p>
+    </div>
   </div>
   <script src="main.js"></script>
 </body>
