@@ -1,38 +1,1352 @@
 [
   {
     "pair_id": "000001",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000002",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000003",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000004",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_layout__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000005",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_pedestrian__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_pedestrian__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000006",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_237.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_220.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000007",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_237.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000008",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_237.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_469.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000009",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_237.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000010",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_220.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000011",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000012",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_469.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000013",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_239.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000014",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_546.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_220.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000015",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_546.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000016",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_546.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_469.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000017",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_546.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000018",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_220.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000019",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000020",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_469.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000021",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000022",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_220.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000023",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_223.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000024",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_469.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000025",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_09_16_45_ckpt_4866048.pth_08_23_11_13_30_collisions_vehicle__tpre2_tpost2__agent2_470.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000026",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_pedestrian__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_pedestrian__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000027",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_140.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000028",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000029",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000030",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000031",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000032",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_536.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_140.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000033",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_536.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000034",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_536.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000035",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_536.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000036",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_536.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000037",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_566.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_140.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000038",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_566.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000039",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_566.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000040",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_566.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000041",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_566.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000042",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_140.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000043",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000044",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000045",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000046",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_567.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000047",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_568.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_140.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000048",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_568.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000049",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_568.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000050",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_568.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000051",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent1_568.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_10_25_16_ckpt_4866048.pth_08_23_11_23_47_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000052",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_layout__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_layout__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000053",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_pedestrian__tpre2_tpost2__agent1_553.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_pedestrian__tpre2_tpost2__agent2_377.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000054",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_313.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_132.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000055",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_313.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000056",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_313.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000057",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_313.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000058",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_537.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_132.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000059",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_537.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000060",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_537.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000061",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_537.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000062",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_132.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000063",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000064",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000065",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_552.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000066",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_554.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_132.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000067",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_554.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_365.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000068",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_554.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_376.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000069",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent1_554.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_11_34_36_ckpt_4866048.pth_08_23_11_32_51_collisions_vehicle__tpre2_tpost2__agent2_378.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000070",
     "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_collisions_vehicle__tpre2_tpost2__agent1_19.mp4",
     "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
     "description": "collisions_vehicle"
   },
   {
-    "pair_id": "000002",
+    "pair_id": "000071",
     "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_vehicle_blocked__tpre2_tpost2__agent1_19.mp4",
     "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_15_44_34_ckpt_4866048.pth_08_23_12_00_27_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
     "description": "vehicle_blocked"
   },
   {
-    "pair_id": "000003",
+    "pair_id": "000072",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_00_56_ckpt_4866048.pth_08_23_14_42_55_red_light__tpre2_tpost2__agent1_168.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_00_56_ckpt_4866048.pth_08_23_14_42_55_red_light__tpre2_tpost2__agent2_167.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000073",
     "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_04_14_ckpt_4866048.pth_08_23_14_46_09_red_light__tpre2_tpost2__agent1_168.mp4",
     "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_04_14_ckpt_4866048.pth_08_23_14_46_09_red_light__tpre2_tpost2__agent2_168.mp4",
     "description": "red_light"
   },
   {
-    "pair_id": "000004",
+    "pair_id": "000074",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_07_43_ckpt_4866048.pth_08_23_14_49_28_red_light__tpre2_tpost2__agent1_168.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_07_43_ckpt_4866048.pth_08_23_14_49_28_red_light__tpre2_tpost2__agent2_167.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000075",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_11_01_ckpt_4866048.pth_08_23_14_52_44_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_11_01_ckpt_4866048.pth_08_23_14_52_44_collisions_vehicle__tpre2_tpost2__agent2_331.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000076",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_18_52_ckpt_4866048.pth_08_23_14_57_45_collisions_pedestrian__tpre2_tpost2__agent1_214.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_18_52_ckpt_4866048.pth_08_23_14_57_45_collisions_pedestrian__tpre2_tpost2__agent2_203.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000077",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_18_52_ckpt_4866048.pth_08_23_14_57_45_collisions_vehicle__tpre2_tpost2__agent1_235.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_18_52_ckpt_4866048.pth_08_23_14_57_45_collisions_vehicle__tpre2_tpost2__agent2_217.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000078",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_26_46_ckpt_4866048.pth_08_23_15_01_22_collisions_pedestrian__tpre2_tpost2__agent1_225.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_26_46_ckpt_4866048.pth_08_23_15_01_22_collisions_pedestrian__tpre2_tpost2__agent2_203.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000079",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_26_46_ckpt_4866048.pth_08_23_15_01_22_collisions_vehicle__tpre2_tpost2__agent1_240.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_19_26_46_ckpt_4866048.pth_08_23_15_01_22_collisions_vehicle__tpre2_tpost2__agent2_217.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000080",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_32_50_ckpt_4866048.pth_08_23_15_51_43_red_light__tpre2_tpost2__agent1_14.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_32_50_ckpt_4866048.pth_08_23_15_51_43_red_light__tpre2_tpost2__agent2_24.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000081",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_37_14_ckpt_4866048.pth_08_23_15_55_51_red_light__tpre2_tpost2__agent1_14.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_37_14_ckpt_4866048.pth_08_23_15_55_51_red_light__tpre2_tpost2__agent2_24.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000082",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_41_27_ckpt_4866048.pth_08_23_15_59_58_red_light__tpre2_tpost2__agent1_14.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_20_41_27_ckpt_4866048.pth_08_23_15_59_58_red_light__tpre2_tpost2__agent2_11.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000083",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_09_43_ckpt_4866048.pth_08_23_16_24_22_red_light__tpre2_tpost2__agent1_199.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_09_43_ckpt_4866048.pth_08_23_16_24_22_red_light__tpre2_tpost2__agent2_186.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000084",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_33_51_ckpt_4866048.pth_08_23_16_44_25_vehicle_blocked__tpre2_tpost2__agent1_194.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_33_51_ckpt_4866048.pth_08_23_16_44_25_vehicle_blocked__tpre2_tpost2__agent2_191.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000085",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_40_43_ckpt_4866048.pth_08_23_16_51_10_vehicle_blocked__tpre2_tpost2__agent1_194.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_40_43_ckpt_4866048.pth_08_23_16_51_10_vehicle_blocked__tpre2_tpost2__agent2_191.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000086",
+    "left_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_47_10_ckpt_4866048.pth_08_23_16_57_27_vehicle_blocked__tpre2_tpost2__agent1_194.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_11833344.pth_08_22_21_47_10_ckpt_4866048.pth_08_23_16_57_27_vehicle_blocked__tpre2_tpost2__agent2_191.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000087",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000088",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000089",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_pedestrian__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_pedestrian__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000090",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_78.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000091",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_78.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000092",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_78.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000093",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_78.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000094",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_78.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000095",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000096",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000097",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000098",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000099",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_81.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000100",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_82.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000101",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_82.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000102",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_82.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000103",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_82.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000104",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_82.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_48_00_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000105",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_pedestrian__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_pedestrian__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000106",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_98.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000107",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_98.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000108",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_98.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000109",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_98.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000110",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_98.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000111",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000112",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000113",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000114",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000115",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_99.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_49_35_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000116",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_layout__tpre2_tpost2__agent1_101.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_layout__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000117",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_pedestrian__tpre2_tpost2__agent1_102.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_pedestrian__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000118",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_101.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000119",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_101.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000120",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_101.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000121",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_101.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000122",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_102.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000123",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_102.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000124",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_102.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000125",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_102.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_17_55_59_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000126",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_15_15_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent1_13.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_15_15_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000127",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_15_15_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent1_13.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_15_15_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000128",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_17_36_ckpt_11833344.pth_08_22_16_24_07_collisions_vehicle__tpre2_tpost2__agent1_13.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_17_36_ckpt_11833344.pth_08_22_16_24_07_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000129",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_17_36_ckpt_11833344.pth_08_22_16_24_07_vehicle_blocked__tpre2_tpost2__agent1_13.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_17_36_ckpt_11833344.pth_08_22_16_24_07_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000130",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_24_02_ckpt_11833344.pth_08_22_19_00_56_red_light__tpre2_tpost2__agent1_50.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_24_02_ckpt_11833344.pth_08_22_19_00_56_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000131",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_25_12_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent1_51.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_25_12_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000132",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_26_25_ckpt_11833344.pth_08_22_19_07_43_red_light__tpre2_tpost2__agent1_51.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_18_26_25_ckpt_11833344.pth_08_22_19_07_43_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000133",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_11_40_ckpt_11833344.pth_08_22_20_32_50_red_light__tpre2_tpost2__agent1_7.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_11_40_ckpt_11833344.pth_08_22_20_32_50_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000134",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_13_13_ckpt_11833344.pth_08_22_20_37_14_red_light__tpre2_tpost2__agent1_6.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_13_13_ckpt_11833344.pth_08_22_20_37_14_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000135",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_14_45_ckpt_11833344.pth_08_22_20_41_27_red_light__tpre2_tpost2__agent1_6.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_14_45_ckpt_11833344.pth_08_22_20_41_27_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000136",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_31_47_ckpt_11833344.pth_08_22_21_09_43_red_light__tpre2_tpost2__agent1_1405.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_19_31_47_ckpt_11833344.pth_08_22_21_09_43_red_light__tpre2_tpost2__agent2_199.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000137",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_02_54_ckpt_11833344.pth_08_22_21_33_51_vehicle_blocked__tpre2_tpost2__agent1_199.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_02_54_ckpt_11833344.pth_08_22_21_33_51_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000138",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_09_49_ckpt_11833344.pth_08_22_21_40_43_vehicle_blocked__tpre2_tpost2__agent1_197.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_09_49_ckpt_11833344.pth_08_22_21_40_43_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000139",
+    "left_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_16_16_ckpt_11833344.pth_08_22_21_47_10_vehicle_blocked__tpre2_tpost2__agent1_222.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_442368.pth_08_23_20_16_16_ckpt_11833344.pth_08_22_21_47_10_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000140",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000141",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000142",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000143",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_layout__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000144",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_pedestrian__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_pedestrian__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000145",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_220.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000146",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_220.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000147",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_220.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000148",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_220.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000149",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_220.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000150",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000151",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000152",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000153",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000154",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_223.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000155",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_469.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000156",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_469.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000157",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_469.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000158",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_469.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000159",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_469.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000160",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_237.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000161",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_239.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000162",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_546.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000163",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000164",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent1_470.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_13_30_ckpt_11833344.pth_08_22_09_16_45_collisions_vehicle__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000165",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_pedestrian__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_pedestrian__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000166",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_140.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000167",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_140.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000168",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_140.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000169",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_140.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000170",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_140.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000171",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000172",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000173",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000174",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000175",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000176",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000177",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000178",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000179",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000180",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000181",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000182",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000183",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000184",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000185",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000186",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000187",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_536.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000188",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_566.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000189",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_567.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000190",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_23_47_ckpt_11833344.pth_08_22_10_25_16_collisions_vehicle__tpre2_tpost2__agent2_568.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000191",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_layout__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_layout__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_layout"
+  },
+  {
+    "pair_id": "000192",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_pedestrian__tpre2_tpost2__agent1_377.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_pedestrian__tpre2_tpost2__agent2_553.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000193",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_132.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000194",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_132.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000195",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_132.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000196",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_132.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000197",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000198",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000199",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000200",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_365.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000201",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000202",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000203",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000204",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_376.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000205",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_313.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000206",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_537.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000207",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_552.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000208",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent1_378.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_11_32_51_ckpt_11833344.pth_08_22_11_34_36_collisions_vehicle__tpre2_tpost2__agent2_554.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000209",
     "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent1_19.mp4",
     "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_collisions_vehicle__tpre2_tpost2__agent2_19.mp4",
     "description": "collisions_vehicle"
   },
   {
-    "pair_id": "000005",
+    "pair_id": "000210",
     "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent1_19.mp4",
     "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_12_00_27_ckpt_11833344.pth_08_22_15_44_34_vehicle_blocked__tpre2_tpost2__agent2_19.mp4",
     "description": "vehicle_blocked"
   },
   {
-    "pair_id": "000006",
+    "pair_id": "000211",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_42_55_ckpt_11833344.pth_08_22_19_00_56_red_light__tpre2_tpost2__agent1_167.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_42_55_ckpt_11833344.pth_08_22_19_00_56_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000212",
     "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_46_09_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent1_168.mp4",
     "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_46_09_ckpt_11833344.pth_08_22_19_04_14_red_light__tpre2_tpost2__agent2_168.mp4",
     "description": "red_light"
+  },
+  {
+    "pair_id": "000213",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_49_28_ckpt_11833344.pth_08_22_19_07_43_red_light__tpre2_tpost2__agent1_167.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_49_28_ckpt_11833344.pth_08_22_19_07_43_red_light__tpre2_tpost2__agent2_168.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000214",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_52_44_ckpt_11833344.pth_08_22_19_11_01_collisions_vehicle__tpre2_tpost2__agent1_331.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_52_44_ckpt_11833344.pth_08_22_19_11_01_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000215",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_57_45_ckpt_11833344.pth_08_22_19_18_52_collisions_pedestrian__tpre2_tpost2__agent1_203.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_57_45_ckpt_11833344.pth_08_22_19_18_52_collisions_pedestrian__tpre2_tpost2__agent2_214.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000216",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_57_45_ckpt_11833344.pth_08_22_19_18_52_collisions_vehicle__tpre2_tpost2__agent1_217.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_14_57_45_ckpt_11833344.pth_08_22_19_18_52_collisions_vehicle__tpre2_tpost2__agent2_235.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000217",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_01_22_ckpt_11833344.pth_08_22_19_26_46_collisions_pedestrian__tpre2_tpost2__agent1_203.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_01_22_ckpt_11833344.pth_08_22_19_26_46_collisions_pedestrian__tpre2_tpost2__agent2_225.mp4",
+    "description": "collisions_pedestrian"
+  },
+  {
+    "pair_id": "000218",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_01_22_ckpt_11833344.pth_08_22_19_26_46_collisions_vehicle__tpre2_tpost2__agent1_217.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_01_22_ckpt_11833344.pth_08_22_19_26_46_collisions_vehicle__tpre2_tpost2__agent2_240.mp4",
+    "description": "collisions_vehicle"
+  },
+  {
+    "pair_id": "000219",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_51_43_ckpt_11833344.pth_08_22_20_32_50_red_light__tpre2_tpost2__agent1_24.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_51_43_ckpt_11833344.pth_08_22_20_32_50_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000220",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_55_51_ckpt_11833344.pth_08_22_20_37_14_red_light__tpre2_tpost2__agent1_24.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_55_51_ckpt_11833344.pth_08_22_20_37_14_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000221",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_59_58_ckpt_11833344.pth_08_22_20_41_27_red_light__tpre2_tpost2__agent1_11.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_15_59_58_ckpt_11833344.pth_08_22_20_41_27_red_light__tpre2_tpost2__agent2_14.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000222",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_24_22_ckpt_11833344.pth_08_22_21_09_43_red_light__tpre2_tpost2__agent1_186.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_24_22_ckpt_11833344.pth_08_22_21_09_43_red_light__tpre2_tpost2__agent2_199.mp4",
+    "description": "red_light"
+  },
+  {
+    "pair_id": "000223",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_44_25_ckpt_11833344.pth_08_22_21_33_51_vehicle_blocked__tpre2_tpost2__agent1_191.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_44_25_ckpt_11833344.pth_08_22_21_33_51_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000224",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_51_10_ckpt_11833344.pth_08_22_21_40_43_vehicle_blocked__tpre2_tpost2__agent1_191.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_51_10_ckpt_11833344.pth_08_22_21_40_43_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
+  },
+  {
+    "pair_id": "000225",
+    "left_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_57_27_ckpt_11833344.pth_08_22_21_47_10_vehicle_blocked__tpre2_tpost2__agent1_191.mp4",
+    "right_clip": "videos/output_42_routes/ckpt_4866048.pth_08_23_16_57_27_ckpt_11833344.pth_08_22_21_47_10_vehicle_blocked__tpre2_tpost2__agent2_194.mp4",
+    "description": "vehicle_blocked"
   }
 ]
