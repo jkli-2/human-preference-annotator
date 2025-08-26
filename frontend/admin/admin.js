@@ -1,5 +1,5 @@
-const API_BASE = "http://localhost:3000/api";
-// const API_BASE = "https://human-preference-api.onrender.com/api";
+// const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://human-preference-api.onrender.com/api";
 let adminToken = "";
 
 const loginBtn = document.getElementById("loginBtn");
