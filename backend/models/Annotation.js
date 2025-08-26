@@ -1,14 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const AttentionSchema = new mongoose.Schema({
-    side: { type: String, enum: ["left","right"] },
-    gridIndex: Number,        // 1..9
-    row: Number, col: Number, // 0..2
-    rect: {                   // normalized to [0,1] in video coords
-        x: Number, y: Number, w: Number, h: Number
+const AttentionSchema = new mongoose.Schema(
+    {
+        side: { type: String, enum: ["left", "right"] },
+        type: { type: String, enum: ["point", "grid", "box"], default: undefined }, // for extensibility
+        x: { type: Number, min: 0, max: 1 }, // normalised [0,1] when coordSpace === 'normalised'
+        y: { type: Number, min: 0, max: 1 },
+        coordSpace: {
+            type: String,
+            enum: ["normalised", "pixel", "cssPixels"],
+            default: "normalised",
+        },
+        decisionAtMs: Number,
     },
-    decisionAtMs: Number
-}, { _id: false });
+    { _id: false }
+);
 
 const AnnotationSchema = new mongoose.Schema({
     annotatorId: String,
@@ -18,7 +24,13 @@ const AnnotationSchema = new mongoose.Schema({
     right: { url: String },
     attention: AttentionSchema,
     isGold: { type: Boolean, default: false },
-    goldExpected: { type: String, enum: ["left", "right"], required: function(){ return this.isGold; } },
+    goldExpected: {
+        type: String,
+        enum: ["left", "right"],
+        required: function () {
+            return this.isGold;
+        },
+    },
     goldCorrect: { type: Boolean },
     isRepeat: { type: Boolean, default: false },
     repeatOf: { type: String },
@@ -32,11 +44,11 @@ AnnotationSchema.index(
     { annotatorId: 1, pairId: 1 },
     {
         unique: true,
-        partialFilterExpression: { isGold: { $ne: true }, isRepeat: { $ne: true } }
+        partialFilterExpression: { isGold: { $ne: true }, isRepeat: { $ne: true } },
     }
 );
 // for queries/exports
 AnnotationSchema.index({ annotatorId: 1, isGold: 1 });
 AnnotationSchema.index({ annotatorId: 1, isRepeat: 1, pairId: 1 });
 
-module.exports = mongoose.model('Annotation', AnnotationSchema);
+module.exports = mongoose.model("Annotation", AnnotationSchema);
