@@ -15,6 +15,21 @@ const REPEAT_RATE = 0.05; // enqueue repeats for 5% of seen items
 const MAX_REPEAT_QUEUE = 5; // cap queue size
 const ATTENTION_RATE = 1.0;
 
+function coerceSurprise(val) {
+    const n = Number(val);
+    return Number.isInteger(n) && n >= 1 && n <= 5 ? n : undefined;
+}
+
+function coerceStageDurations(obj) {
+    if (!obj || typeof obj !== "object") return undefined;
+    const out = {};
+    for (const k of Object.keys(obj)) {
+        const v = Number(obj[k]);
+        if (Number.isFinite(v) && v >= 0) out[k] = Math.floor(v);
+    }
+    return Object.keys(out).length ? out : undefined;
+}
+
 function getAnnotatorIdFromToken(token) {
     const tokens = loadTokens();
     const found = tokens.find((t) => t.token === token);
@@ -86,6 +101,8 @@ router.get("/admin/export", requireAdmin, async (req, res) => {
             response: a.response,
             left_url: a.left?.url || null,
             right_url: a.right?.url || null,
+            left_surprise: Number.isFinite(a.left?.surprise) ? a.left.surprise : null,
+            right_surprise: Number.isFinite(a.right?.surprise) ? a.right.surprise : null,
             is_gold: a.isGold || false,
             gold_expected: a.goldExpected || null,
             gold_correct: typeof a.goldCorrect === "boolean" ? a.goldCorrect : null,
@@ -103,6 +120,7 @@ router.get("/admin/export", requireAdmin, async (req, res) => {
             attention_url: attentionUrl, // convenience: URL of the chosen-side video at decision time
 
             timestamp: a.timestamp,
+            stage_durations: a.stageDurations ? Object.fromEntries(a.stageDurations) : null,
         };
     });
     res.json(output);
@@ -216,6 +234,10 @@ router.post("/annotate", async (req, res) => {
     if (!annotatorId) return res.status(403).json({ error: "Invalid token" });
 
     const { pairId, response, left, right, presentedTime, responseTimeMs } = req.body;
+    // surprises & step timing
+    const leftSurprise = coerceSurprise(left?.surprise);
+    const rightSurprise = coerceSurprise(right?.surprise);
+    const stageDurations = coerceStageDurations(req.body.stageDurations);
 
     let attention = req.body.attention || undefined;
     if (attention && typeof attention === "object") {
@@ -232,6 +254,31 @@ router.post("/annotate", async (req, res) => {
             }
         }
         // else if (attention.type === "box") {}
+    }
+
+    // Validation
+    if (response !== "cant_tell") {
+        // Require per-clip surprises
+        if (leftSurprise == null || rightSurprise == null) {
+            return res
+                .status(400)
+                .json({ error: "left.surprise and right.surprise (1..5) are required" });
+        }
+        // Optionally require attention point when attention is "on" for all pairs
+        if (ATTENTION_RATE >= 1.0) {
+            if (
+                !(
+                    attention &&
+                    attention.type === "point" &&
+                    Number.isFinite(attention.x) &&
+                    Number.isFinite(attention.y)
+                )
+            ) {
+                return res.status(400).json({ error: "attention point required" });
+            }
+        }
+    } else {
+        // cant_tell: missing surprises/attention is allowed.
     }
 
     const goldPairs = JSON.parse(fs.readFileSync(goldPairsPath));
@@ -259,11 +306,13 @@ router.post("/annotate", async (req, res) => {
             annotatorId,
             pairId,
             response,
-            left: { url: left?.url },
-            right: { url: right?.url },
+            // Persist URL with surprise per side (surprise may be undefined for cant_tell)
+            left: { url: left?.url, surprise: leftSurprise },
+            right: { url: right?.url, surprise: rightSurprise },
             presentedTime: presentedTime ? new Date(presentedTime) : undefined,
             responseTimeMs: Number.isFinite(responseTimeMs) ? responseTimeMs : computedRt,
             attention,
+            stageDurations,
             isGold,
             goldExpected,
             goldCorrect,
