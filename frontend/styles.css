@@ -47,9 +47,9 @@ video {
 }
 
 #description {
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 5px;
-  /* font-style: italic; */
+  font-style: italic;
 }
 
 #notes {

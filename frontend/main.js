@@ -23,6 +23,189 @@ let pendingChoice = null;
 let decisionAtMs = null;
 let regionTimeoutId = null;
 
+// 3-step annotation state (Preference, Surprise, Attention)
+const STEPS = { PREF: 0, SURPRISE: 1, ATTENTION: 2 };
+const STEP_LABELS = ["Preference", "Surprise", "Attention"];
+let step = STEPS.PREF;
+let staged = null;
+
+function ensureTopStepperEl() {
+    let el = document.getElementById("stepper");
+    if (!el) {
+        const host = document.getElementById("topbar-center");
+        el = document.createElement("div");
+        el.id = "stepper";
+        el.style.marginTop = "6px";
+        host && host.appendChild(el);
+    }
+    return el;
+}
+
+function updateTopStepper(activeStepIdx = 0) {
+    const el = ensureTopStepperEl();
+    if (!el) return;
+
+    const steps = STEP_LABELS.map((label, idx) => {
+        const status = idx < activeStepIdx ? "done" : idx === activeStepIdx ? "active" : "todo";
+        const circleBg =
+            status === "done" ? "#2ecc71" : status === "active" ? "#2980b9" : "#d0d7de";
+        const circleColor = status === "todo" ? "#555" : "#fff";
+        const border = status === "todo" ? "1px solid #9aa4ae" : "1px solid transparent";
+        const connectorColor = idx < activeStepIdx ? "#2ecc71" : "#d0d7de";
+
+        return `
+      <div style="position:relative; display:flex; align-items:center;">
+        <div style="
+          width:22px;height:22px;border-radius:999px;
+          background:${circleBg}; color:${circleColor};
+          display:flex;align-items:center;justify-content:center;
+          font:600 12px system-ui; border:${border};
+          box-shadow: ${status !== "todo" ? "0 0 0 2px rgba(0,0,0,0.06) inset" : "none"};
+        ">${idx + 1}</div>
+        <div style="margin-left:8px; min-width:88px; font:600 12px system-ui; color:#111;">
+          ${label}
+        </div>
+        ${
+            idx < STEP_LABELS.length - 1
+                ? `<div style="flex:1;height:2px;background:${connectorColor};margin:0 14px 0 0;border-radius:2px;">\u00A0\u00A0</div>`
+                : ``
+        }
+      </div>
+    `;
+    }).join("");
+
+    el.innerHTML = `
+    <div style="display:flex;align-items:center;gap:0; padding:6px 8px;">
+      ${steps}
+    </div>
+  `;
+}
+
+function resetStepperForPair() {
+    step = STEPS.PREF;
+    staged = {
+        preference: null,
+        decisionAtMs: null,
+        surprise: { left: null, right: null },
+        attention: null,
+        startedAt: Date.now(),
+        stepT0: Date.now(),
+        stepDurations: {},
+    };
+    renderStepUI();
+    updateTopStepper(0);
+}
+
+function markStepAdvance(nextStep) {
+    const now = Date.now();
+    staged.stepDurations[step] = (staged.stepDurations[step] || 0) + (now - (staged.stepT0 || now));
+    step = nextStep;
+    staged.stepT0 = now;
+    renderStepUI();
+    updateTopStepper(nextStep);
+}
+
+function renderStepUI() {
+    const notes = document.getElementById("notes");
+    const buttons = document.getElementById("buttons");
+    const chosen = staged?.preference;
+    const stepName =
+        step === STEPS.PREF
+            ? "Step 1/3: Preference"
+            : step === STEPS.SURPRISE
+            ? "Step 2/3: Surprise"
+            : "Step 3/3: Attention";
+    notes.innerHTML =
+        // `<p id="instructions"><strong>${stepName}</strong></p>` +
+        (step === STEPS.PREF
+            ? `<p id="instructions">Choose the clip you prefer (ArrowLeft = Up, ArrowRight = Down, ArrowDown = Can't tell).</p>`
+            : step === STEPS.SURPRISE
+            ? `<p id="instructions">Rate how <em>surprising</em> each clip felt (1 = not at all, 5 = very). Hotkeys: 1-5 for Up, Q-T for Down.</p>`
+            : `<p id="instructions">Mark the spot that drove your choice on the <b>${
+                  chosen === "left" ? "Up" : "Down"
+              }</b> clip. Press X to place (or click the video). Esc cancels.</p>`);
+
+    if (step === STEPS.PREF) {
+        buttons.innerHTML = `
+      <button onclick="handleChoice('left')">Prefer Up</button>
+      <button onclick="handleChoice('right')">Prefer Down</button>
+      <button onclick="handleChoice('cant_tell')">Can't Tell</button>`;
+    } else if (step === STEPS.SURPRISE) {
+        buttons.innerHTML = `
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <div><div style="font-weight:600;margin-bottom:4px">Up clip</div>
+          ${[1, 2, 3, 4, 5]
+              .map((v) => `<button data-side="left" data-val="${v}" class="surBtn">${v}</button>`)
+              .join(" ")}
+          <span id="leftSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.left ?? "-"}</span>
+        </div>
+        <div><div style="font-weight:600;margin-bottom:4px">Down clip</div>
+          ${[1, 2, 3, 4, 5]
+              .map((v) => `<button data-side="right" data-val="${v}" class="surBtn">${v}</button>`)
+              .join(" ")}
+          <span id="rightSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.right ?? "-"}</span>
+        </div>
+        <div><button id="surpriseNext" disabled>Next</button></div>
+      </div>`;
+        buttons.querySelectorAll(".surBtn").forEach((b) => {
+            b.addEventListener("click", () => {
+                const side = b.dataset.side,
+                    val = Number(b.dataset.val);
+                staged.surprise[side] = val;
+                document.getElementById(
+                    side === "left" ? "leftSurVal" : "rightSurVal"
+                ).textContent = val;
+                buttons.querySelector("#surpriseNext").disabled = !(
+                    staged.surprise.left && staged.surprise.right
+                );
+            });
+        });
+        buttons
+            .querySelector("#surpriseNext")
+            .addEventListener("click", () => markStepAdvance(STEPS.ATTENTION));
+    } else if (step === STEPS.ATTENTION) {
+        buttons.innerHTML = `
+      <button id="markPointBtn">Mark attention on ${chosen === "left" ? "Up" : "Down"} (X)</button>
+      ${
+          requireRegion && (chosen === "left" || chosen === "right")
+              ? ""
+              : '<button id="submitNoPoint">Submit without point</button>'
+      }
+    `;
+        const side = chosen;
+        const go = () => {
+            showPointOverlay(side, (pt) => {
+                if (pt) {
+                    staged.attention = {
+                        type: "point",
+                        side,
+                        x: pt.x,
+                        y: pt.y,
+                        coordSpace: "normalised",
+                        decisionAtMs: staged.decisionAtMs,
+                    };
+                } else {
+                    staged.attention = {
+                        type: "point",
+                        side,
+                        skipped: true,
+                        decisionAtMs: staged.decisionAtMs,
+                    };
+                }
+                submitStagedAnnotation();
+            });
+        };
+        document.getElementById("markPointBtn").addEventListener("click", go);
+        const skipBtn = document.getElementById("submitNoPoint");
+        if (skipBtn)
+            skipBtn.addEventListener("click", () => {
+                staged.attention = null;
+                submitStagedAnnotation();
+            });
+        if (requireRegion && (side === "left" || side === "right")) setTimeout(go, 50); // auto-open if required
+    }
+}
+
 function updateProgress(video, bar) {
     const percentage = (video.currentTime / video.duration) * 100;
     bar.style.width = `${percentage}%`;
@@ -128,6 +311,8 @@ function renderPair(pair) {
     rightVideo.loop = true;
     leftVideo.controls = true;
     rightVideo.controls = true;
+
+    resetStepperForPair();
 }
 
 function getNormalisedCoords(evt, el) {
@@ -272,38 +457,23 @@ function showPointOverlay(side, onPick) {
 function handleChoice(response) {
     const leftVideo = document.getElementById("leftVideo");
     const rightVideo = document.getElementById("rightVideo");
-
     const chosenVideo = response === "left" ? leftVideo : response === "right" ? rightVideo : null;
 
     pendingChoice = response;
     decisionAtMs = chosenVideo ? Math.round(chosenVideo.currentTime * 1000) : null;
 
-    if (requireRegion && (response === "left" || response === "right")) {
-        showPointOverlay(response, (pt) => {
-            let attention = undefined;
-            if (pt) {
-                attention = {
-                    type: "point",
-                    side: response,
-                    x: pt.x,
-                    y: pt.y,
-                    coordSpace: "normalised",
-                    decisionAtMs,
-                };
-            } else {
-                attention = {
-                    type: "point",
-                    side: response,
-                    skipped: true,
-                    decisionAtMs,
-                };
-            }
-            submitResponse(pendingChoice, attention);
-        });
+    if (!staged) resetStepperForPair();
+    staged.preference = response;
+    staged.decisionAtMs = decisionAtMs;
+
+    if (response === "cant_tell") {
+        // Skip Surprise/Attention when annotator can't tell
+        staged.surprise = { left: null, right: null };
+        staged.attention = null;
+        submitStagedAnnotation();
         return;
     }
-    // No attention requested
-    submitResponse(response, undefined);
+    markStepAdvance(STEPS.SURPRISE);
 }
 
 async function loadNextPair() {
@@ -327,6 +497,7 @@ async function loadNextPair() {
     renderPair(data);
 }
 
+// For compatibility
 async function submitResponse(response, attention) {
     const now = new Date();
     const responseTimeMs = presentedTime ? now - presentedTime : undefined;
@@ -356,6 +527,43 @@ window.onload = () => {
     attachProgress("rightVideo", "rightProgress");
 };
 
+async function submitStagedAnnotation() {
+    // close current step timing
+    if (staged) {
+        const now = Date.now();
+        staged.stepDurations[step] =
+            (staged.stepDurations[step] || 0) + (now - (staged.stepT0 || now));
+    }
+
+    const response = staged.preference;
+    const attention = staged.attention; // may be null
+    const surprise = staged.surprise;
+    const stageDurations = staged.stepDurations;
+
+    const nowDate = new Date();
+    const responseTimeMs = presentedTime ? nowDate - presentedTime : undefined;
+
+    await fetch(`${API_BASE}/annotate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            token,
+            pairId: currentPair.pair_id,
+            response, // "left" | "right" | "cant_tell"
+            left: { url: currentPair.left_clip, surprise: surprise?.left ?? null },
+            right: { url: currentPair.right_clip, surprise: surprise?.right ?? null },
+            presentedTime,
+            responseTimeMs,
+            isGold: currentPair._meta?.isGold || false,
+            isRepeat: currentPair._meta?.isRepeat || false,
+            repeatOf: currentPair._meta?.repeatOf,
+            attention,
+            stageDurations, // optional; backend can ignore
+        }),
+    });
+    loadNextPair();
+}
+
 // Keyboard shortcuts: LEFT prefer left, RIGHT prefer right, DOWN means can't tell
 (function setupKeyboardShortcuts() {
     const isTextInput = (el) =>
@@ -367,15 +575,50 @@ window.onload = () => {
             if (e.repeat) return;
             if (isTextInput(document.activeElement) || e.isComposing) return;
             if (awaitingRegion) return;
-            if (e.key === "ArrowLeft") {
-                e.preventDefault();
-                handleChoice("left");
-            } else if (e.key === "ArrowRight") {
-                e.preventDefault();
-                handleChoice("right");
-            } else if (e.key === "ArrowDown") {
-                e.preventDefault();
-                handleChoice("cant_tell");
+
+            if (step === undefined || step === STEPS.PREF) {
+                if (e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    handleChoice("left");
+                } else if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    handleChoice("right");
+                } else if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    handleChoice("cant_tell");
+                }
+            } else if (step === STEPS.SURPRISE) {
+                const leftMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 };
+                const rightMap = { q: 1, w: 2, e: 3, r: 4, t: 5, Q: 1, W: 2, E: 3, R: 4, T: 5 };
+                if (leftMap[e.key] != null) {
+                    e.preventDefault();
+                    staged.surprise.left = leftMap[e.key];
+                    const s = document.getElementById("leftSurVal");
+                    if (s) s.textContent = staged.surprise.left;
+                } else if (rightMap[e.key] != null) {
+                    e.preventDefault();
+                    staged.surprise.right = rightMap[e.key];
+                    const s = document.getElementById("rightSurVal");
+                    if (s) s.textContent = staged.surprise.right;
+                } else if (e.key === "Enter") {
+                    e.preventDefault();
+                }
+                const nextBtn = document.getElementById("surpriseNext");
+                const canNext = staged?.surprise?.left && staged?.surprise?.right;
+                if (nextBtn) nextBtn.disabled = !canNext;
+                if (canNext && e.key === "Enter") markStepAdvance(STEPS.ATTENTION);
+            } else if (step === STEPS.ATTENTION) {
+                if (e.key === "x" || e.key === "X") {
+                    e.preventDefault();
+                    const btn = document.getElementById("markPointBtn");
+                    if (btn) btn.click();
+                } else if (e.key === "Enter") {
+                    const skip = document.getElementById("submitNoPoint");
+                    if (skip) {
+                        e.preventDefault();
+                        skip.click();
+                    }
+                }
             }
         },
         { passive: false }
