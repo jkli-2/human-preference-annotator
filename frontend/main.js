@@ -201,7 +201,7 @@ function renderStepUI() {
                 </div>
             </div>
             <div style="flex:1"></div>
-            <button id="surpriseNext" disabled>Next</button>
+            <button id="surpriseNext" style="display:none" disabled>Next</button>
             </div>`;
 
         const canNext = () => !!staged.surpriseChoice; // binary choice required
@@ -212,15 +212,18 @@ function renderStepUI() {
 
         document.getElementById("surL").addEventListener("click", () => {
             staged.surpriseChoice = "left";
-            updateNext();
+            // updateNext();
+            markStepAdvance(STEPS.ATTENTION);
         });
         document.getElementById("surR").addEventListener("click", () => {
             staged.surpriseChoice = "right";
-            updateNext();
+            // updateNext();
+            markStepAdvance(STEPS.ATTENTION);
         });
         document.getElementById("surNone").addEventListener("click", () => {
             staged.surpriseChoice = "none";
-            updateNext();
+            // updateNext();
+            markStepAdvance(STEPS.ATTENTION);
         });
 
         const adv = document.getElementById("advWrap");
@@ -676,12 +679,18 @@ async function submitStagedAnnotation() {
                 if (e.key === "ArrowLeft") {
                     e.preventDefault();
                     staged.surpriseChoice = "left";
+                    markStepAdvance(STEPS.ATTENTION);
+                    return;
                 } else if (e.key === "ArrowRight") {
                     e.preventDefault();
                     staged.surpriseChoice = "right";
+                    markStepAdvance(STEPS.ATTENTION);
+                    return;
                 } else if (e.key === "n" || e.key === "N") {
                     e.preventDefault();
                     staged.surpriseChoice = "none";
+                    markStepAdvance(STEPS.ATTENTION);
+                    return;
                 } else if (leftMap[e.key] != null) {
                     staged.surprise.left = leftMap[e.key];
                     const s = document.getElementById("leftSurVal");
