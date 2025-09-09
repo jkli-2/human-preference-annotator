@@ -20,6 +20,10 @@ function coerceSurprise(val) {
     return Number.isInteger(n) && n >= 1 && n <= 5 ? n : undefined;
 }
 
+function coerceSurpriseChoice(v) {
+    return v === "left" || v === "right" || v === "none" ? v : undefined;
+}
+
 function coerceStageDurations(obj) {
     if (!obj || typeof obj !== "object") return undefined;
     const out = {};
@@ -99,6 +103,7 @@ router.get("/admin/export", requireAdmin, async (req, res) => {
             annotator_id: a.annotatorId,
             pair_id: a.pairId,
             response: a.response,
+            surprise_choice: a.surpriseChoice || null,
             left_url: a.left?.url || null,
             right_url: a.right?.url || null,
             left_surprise: Number.isFinite(a.left?.surprise) ? a.left.surprise : null,
@@ -235,6 +240,7 @@ router.post("/annotate", async (req, res) => {
 
     const { pairId, response, left, right, presentedTime, responseTimeMs } = req.body;
     // surprises & step timing
+    const surpriseChoice = coerceSurpriseChoice(req.body.surpriseChoice);
     const leftSurprise = coerceSurprise(left?.surprise);
     const rightSurprise = coerceSurprise(right?.surprise);
     const stageDurations = coerceStageDurations(req.body.stageDurations);
@@ -258,12 +264,17 @@ router.post("/annotate", async (req, res) => {
 
     // Validation
     if (response !== "cant_tell") {
-        // Require per-clip surprises
-        if (leftSurprise == null || rightSurprise == null) {
-            return res
-                .status(400)
-                .json({ error: "left.surprise and right.surprise (1..5) are required" });
-        }
+        // if (!surpriseChoice) {
+        //     return res
+        //         .status(400)
+        //         .json({ error: "surpriseChoice required: 'left' | 'right' | 'none'" });
+        // }
+        // // Require per-clip surprises
+        // if (!surpriseChoice || leftSurprise == null || rightSurprise == null) {
+        //     return res
+        //         .status(400)
+        //         .json({ error: "left.surprise and right.surprise (1..5) are required" });
+        // }
         // Optionally require attention point when attention is "on" for all pairs
         if (ATTENTION_RATE >= 1.0) {
             if (
@@ -306,6 +317,7 @@ router.post("/annotate", async (req, res) => {
             annotatorId,
             pairId,
             response,
+            surpriseChoice,
             // Persist URL with surprise per side (surprise may be undefined for cant_tell)
             left: { url: left?.url, surprise: leftSurprise },
             right: { url: right?.url, surprise: rightSurprise },

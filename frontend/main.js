@@ -86,6 +86,7 @@ function resetStepperForPair() {
     staged = {
         preference: null,
         decisionAtMs: null,
+        surpriseChoice: null,
         surprise: { left: null, right: null },
         attention: null,
         startedAt: Date.now(),
@@ -117,36 +118,117 @@ function renderStepUI() {
             : "Step 3/3: Attention";
     notes.innerHTML =
         // `<p id="instructions"><strong>${stepName}</strong></p>` +
-        (step === STEPS.PREF
+        step === STEPS.PREF
             ? `<p id="instructions">Choose the clip you prefer (ArrowLeft = Up, ArrowRight = Down, ArrowDown = Can't tell).</p>`
             : step === STEPS.SURPRISE
             ? `<p id="instructions">Rate how <em>surprising</em> each clip felt (1 = not at all, 5 = very). Hotkeys: 1-5 for Up, Q-T for Down.</p>`
             : `<p id="instructions">Mark the spot that drove your choice on the <b>${
                   chosen === "left" ? "Up" : "Down"
-              }</b> clip. Press X to place (or click the video). Esc cancels.</p>`);
+              }</b> clip. Press X to place (or click the video). Esc cancels.</p>`;
 
     if (step === STEPS.PREF) {
         buttons.innerHTML = `
       <button onclick="handleChoice('left')">Prefer Up</button>
       <button onclick="handleChoice('right')">Prefer Down</button>
       <button onclick="handleChoice('cant_tell')">Can't Tell</button>`;
-    } else if (step === STEPS.SURPRISE) {
+    }
+
+    // else if (step === STEPS.SURPRISE) {
+    //     buttons.innerHTML = `
+    //   <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+    //     <div><div style="font-weight:600;margin-bottom:4px">Up clip</div>
+    //       ${[1, 2, 3, 4, 5]
+    //           .map((v) => `<button data-side="left" data-val="${v}" class="surBtn">${v}</button>`)
+    //           .join(" ")}
+    //       <span id="leftSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.left ?? "-"}</span>
+    //     </div>
+    //     <div><div style="font-weight:600;margin-bottom:4px">Down clip</div>
+    //       ${[1, 2, 3, 4, 5]
+    //           .map((v) => `<button data-side="right" data-val="${v}" class="surBtn">${v}</button>`)
+    //           .join(" ")}
+    //       <span id="rightSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.right ?? "-"}</span>
+    //     </div>
+    //     <div><button id="surpriseNext" disabled>Next</button></div>
+    //   </div>`;
+    //     buttons.querySelectorAll(".surBtn").forEach((b) => {
+    //         b.addEventListener("click", () => {
+    //             const side = b.dataset.side,
+    //                 val = Number(b.dataset.val);
+    //             staged.surprise[side] = val;
+    //             document.getElementById(
+    //                 side === "left" ? "leftSurVal" : "rightSurVal"
+    //             ).textContent = val;
+    //             buttons.querySelector("#surpriseNext").disabled = !(
+    //                 staged.surprise.left && staged.surprise.right
+    //             );
+    //         });
+    //     });
+    //     buttons
+    //         .querySelector("#surpriseNext")
+    //         .addEventListener("click", () => markStepAdvance(STEPS.ATTENTION));
+    // }
+    else if (step === STEPS.SURPRISE) {
         buttons.innerHTML = `
-      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-        <div><div style="font-weight:600;margin-bottom:4px">Up clip</div>
-          ${[1, 2, 3, 4, 5]
-              .map((v) => `<button data-side="left" data-val="${v}" class="surBtn">${v}</button>`)
-              .join(" ")}
-          <span id="leftSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.left ?? "-"}</span>
-        </div>
-        <div><div style="font-weight:600;margin-bottom:4px">Down clip</div>
-          ${[1, 2, 3, 4, 5]
-              .map((v) => `<button data-side="right" data-val="${v}" class="surBtn">${v}</button>`)
-              .join(" ")}
-          <span id="rightSurVal" style="margin-left:8px; margin-right: 18px;">${staged.surprise.right ?? "-"}</span>
-        </div>
-        <div><button id="surpriseNext" disabled>Next</button></div>
-      </div>`;
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <button id="surL">Up surprised me more</button>
+            <button id="surR">Down surprised me more</button>
+            <button id="surNone">No surprising event</button>
+            <button id="advToggle" style="margin-left:12px;display:none">Advanced 1-5</button>
+            <div id="advWrap" style="display:none; width:100%; padding-top:6px;">
+                <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+                <div><div style="font-weight:600;margin-bottom:4px">Up clip</div>
+                    ${[1, 2, 3, 4, 5]
+                        .map(
+                            (v) =>
+                                `<button data-side="left" data-val="${v}" class="surBtn">${v}</button>`
+                        )
+                        .join(" ")}
+                    <span id="leftSurVal" style="margin-left:8px">${
+                        staged.surprise.left ?? "—"
+                    }</span>
+                </div>
+                <div><div style="font-weight:600;margin-bottom:4px">Down clip</div>
+                    ${[1, 2, 3, 4, 5]
+                        .map(
+                            (v) =>
+                                `<button data-side="right" data-val="${v}" class="surBtn">${v}</button>`
+                        )
+                        .join(" ")}
+                    <span id="rightSurVal" style="margin-left:8px">${
+                        staged.surprise.right ?? "—"
+                    }</span>
+                </div>
+                </div>
+            </div>
+            <div style="flex:1"></div>
+            <button id="surpriseNext" disabled>Next</button>
+            </div>`;
+
+        const canNext = () => !!staged.surpriseChoice; // binary choice required
+        const updateNext = () => {
+            const n = document.getElementById("surpriseNext");
+            if (n) n.disabled = !canNext();
+        };
+
+        document.getElementById("surL").addEventListener("click", () => {
+            staged.surpriseChoice = "left";
+            updateNext();
+        });
+        document.getElementById("surR").addEventListener("click", () => {
+            staged.surpriseChoice = "right";
+            updateNext();
+        });
+        document.getElementById("surNone").addEventListener("click", () => {
+            staged.surpriseChoice = "none";
+            updateNext();
+        });
+
+        const adv = document.getElementById("advWrap");
+        document.getElementById("advToggle").addEventListener("click", () => {
+            const open = adv.style.display !== "none";
+            adv.style.display = open ? "none" : "block";
+        });
+
         buttons.querySelectorAll(".surBtn").forEach((b) => {
             b.addEventListener("click", () => {
                 const side = b.dataset.side,
@@ -155,14 +237,12 @@ function renderStepUI() {
                 document.getElementById(
                     side === "left" ? "leftSurVal" : "rightSurVal"
                 ).textContent = val;
-                buttons.querySelector("#surpriseNext").disabled = !(
-                    staged.surprise.left && staged.surprise.right
-                );
             });
         });
-        buttons
-            .querySelector("#surpriseNext")
-            .addEventListener("click", () => markStepAdvance(STEPS.ATTENTION));
+
+        document.getElementById("surpriseNext").addEventListener("click", () => {
+            if (canNext()) markStepAdvance(STEPS.ATTENTION);
+        });
     } else if (step === STEPS.ATTENTION) {
         buttons.innerHTML = `
       <button id="markPointBtn">Mark attention on ${chosen === "left" ? "Up" : "Down"} (X)</button>
@@ -508,6 +588,7 @@ async function submitResponse(response, attention) {
             token,
             pairId: currentPair.pair_id,
             response,
+            surpriseChoice: staged.surpriseChoice,
             left: { url: currentPair.left_clip },
             right: { url: currentPair.right_clip },
             presentedTime,
@@ -550,6 +631,7 @@ async function submitStagedAnnotation() {
             token,
             pairId: currentPair.pair_id,
             response, // "left" | "right" | "cant_tell"
+            surpriseChoice: staged.surpriseChoice,
             left: { url: currentPair.left_clip, surprise: surprise?.left ?? null },
             right: { url: currentPair.right_clip, surprise: surprise?.right ?? null },
             presentedTime,
@@ -590,23 +672,35 @@ async function submitStagedAnnotation() {
             } else if (step === STEPS.SURPRISE) {
                 const leftMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 };
                 const rightMap = { q: 1, w: 2, e: 3, r: 4, t: 5, Q: 1, W: 2, E: 3, R: 4, T: 5 };
-                if (leftMap[e.key] != null) {
+
+                if (e.key === "ArrowLeft") {
                     e.preventDefault();
+                    staged.surpriseChoice = "left";
+                } else if (e.key === "ArrowRight") {
+                    e.preventDefault();
+                    staged.surpriseChoice = "right";
+                } else if (e.key === "n" || e.key === "N") {
+                    e.preventDefault();
+                    staged.surpriseChoice = "none";
+                } else if (leftMap[e.key] != null) {
                     staged.surprise.left = leftMap[e.key];
                     const s = document.getElementById("leftSurVal");
                     if (s) s.textContent = staged.surprise.left;
                 } else if (rightMap[e.key] != null) {
-                    e.preventDefault();
                     staged.surprise.right = rightMap[e.key];
                     const s = document.getElementById("rightSurVal");
                     if (s) s.textContent = staged.surprise.right;
                 } else if (e.key === "Enter") {
-                    e.preventDefault();
+                    // fall through to next if we have a choice
                 }
+
                 const nextBtn = document.getElementById("surpriseNext");
-                const canNext = staged?.surprise?.left && staged?.surprise?.right;
+                const canNext = !!staged.surpriseChoice;
                 if (nextBtn) nextBtn.disabled = !canNext;
-                if (canNext && e.key === "Enter") markStepAdvance(STEPS.ATTENTION);
+                if (canNext && e.key === "Enter") {
+                    e.preventDefault();
+                    markStepAdvance(STEPS.ATTENTION);
+                }
             } else if (step === STEPS.ATTENTION) {
                 if (e.key === "x" || e.key === "X") {
                     e.preventDefault();

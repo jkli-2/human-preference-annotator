@@ -43,6 +43,7 @@ const AnnotationSchema = new mongoose.Schema({
   pairId: String,
   response: { type: String, enum: ["left", "right", "cant_tell"], required: true },
 
+  surpriseChoice: { type: String, enum: ["left", "right", "none"], required: false },
   // LEFT/RIGHT also include optional 'surprise'
   left: SideSchema,
   right: SideSchema,
