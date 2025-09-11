@@ -246,6 +246,7 @@ router.post("/annotate", async (req, res) => {
     const stageDurations = coerceStageDurations(req.body.stageDurations);
 
     let attention = req.body.attention || undefined;
+    let attentionSamples = req.body.attentionSamples || undefined;
     if (attention && typeof attention === "object") {
         if (attention.side !== "left" && attention.side !== "right") {
             attention.side = undefined;
@@ -258,12 +259,21 @@ router.post("/annotate", async (req, res) => {
                 if (Number.isFinite(attention.x)) attention.x = clamp01(attention.x);
                 if (Number.isFinite(attention.y)) attention.y = clamp01(attention.y);
             }
+            if (ATTENTION_RATE >= 1.0) {
+                if (!(Number.isFinite(attention.x) && Number.isFinite(attention.y))) {
+                    return res.status(400).json({ error: "attention point required" });
+                }
+            }
+        } else if (attention.type === "pause-sampling") {
+            if (!attentionSamples) {
+                return res.status(400).json({ error: "attention sampling point required" });
+            }
         }
-        // else if (attention.type === "box") {}
     }
 
     // Validation
     if (response !== "cant_tell") {
+        // left or right
         // if (!surpriseChoice) {
         //     return res
         //         .status(400)
@@ -276,18 +286,6 @@ router.post("/annotate", async (req, res) => {
         //         .json({ error: "left.surprise and right.surprise (1..5) are required" });
         // }
         // Optionally require attention point when attention is "on" for all pairs
-        if (ATTENTION_RATE >= 1.0) {
-            if (
-                !(
-                    attention &&
-                    attention.type === "point" &&
-                    Number.isFinite(attention.x) &&
-                    Number.isFinite(attention.y)
-                )
-            ) {
-                return res.status(400).json({ error: "attention point required" });
-            }
-        }
     } else {
         // cant_tell: missing surprises/attention is allowed.
     }
