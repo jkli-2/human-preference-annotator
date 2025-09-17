@@ -20,6 +20,11 @@ document.getElementById("flushBtn")?.addEventListener("click", flushDatabase);
 document.getElementById("downloadBtn")?.addEventListener("click", downloadAnnotations);
 
 loginBtn?.addEventListener("click", login);
+document.getElementById("adminPassword")?.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    login(); // call the same function
+  }
+});
 
 async function login() {
     const password = document.getElementById("adminPassword").value.trim();
