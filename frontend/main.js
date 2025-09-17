@@ -589,6 +589,9 @@ function showMultiPointCollector(side, onDone) {
     const wrap = video.parentElement;
     wrap.style.position = wrap.style.position || "relative";
 
+    // Ensure only one overlay at a time
+    document.getElementById("multiOverlay")?.remove();
+
     const overlay = document.createElement("div");
     overlay.id = "multiOverlay";
     overlay.style.position = "absolute";
@@ -678,52 +681,69 @@ function showMultiPointCollector(side, onDone) {
 
 /**
  * startPauseSampling(side, onDone)
- * Replays the chosen side from t=0, pauses at every PAUSE_SAMPLE_MS boundary,
- * opens multi-point collector, resumes automatically, and completes at end.
- * Calls onDone({ type:"pause-sampling", side, samples, decisionAtMs }) at the end.
+ * Pauses every N ms, collects multiple points per stop, resumes until end.
+ * All listeners are attached with an AbortController to guarantee teardown.
  */
 function startPauseSampling(side, onDone) {
     const chosenVideo = document.getElementById(side === "left" ? "leftVideo" : "rightVideo");
     const otherVideo = document.getElementById(side === "left" ? "rightVideo" : "leftVideo");
 
-    // Focus UI on the chosen video
+    // Ensure previous sessions are fully stopped
+    cancelPauseSampling();
+    psAbort = new AbortController();
+    const { signal } = psAbort;
+    psActive = true;
+
+    // Prepare playback
     otherVideo.pause();
-    otherVideo.controls = false;
-    chosenVideo.controls = false;
     chosenVideo.loop = false;
+    chosenVideo.controls = false;
     chosenVideo.currentTime = 0;
-    chosenVideo.muted = true; // keep muted to avoid audio rules
+    chosenVideo.muted = true;
 
-    const durationMs = () => Math.floor((chosenVideo.duration || 0) * 1000);
-    const nextBreaks = [];
-    const step = Math.max(200, PAUSE_SAMPLE_MS);
-    const dur = durationMs();
-    for (let t = step; t < dur + 50; t += step) nextBreaks.push(t);
+    const step = Math.max(200, Number(new URLSearchParams(location.search).get("ps") || 1000));
+    const durMs = () => Math.floor((chosenVideo.duration || 0) * 1000);
+    const breaks = [];
+    for (let t = step; t < durMs() + 50; t += step) breaks.push(t);
 
-    const samples = []; // { tsMs, points: [{x,y}] }
-    let currentIdx = 0;
-    let armed = false; // armed to pause on or past next break
+    const samples = [];
+    let idx = 0;
+    let armed = true;
 
     const ensurePlaying = async () => {
         try {
             await chosenVideo.play();
-        } catch (_) {
-            /* ignore */
-        }
+        } catch (_) {}
+    };
+
+    const finish = () => {
+        if (!psActive) return;
+        psActive = false;
+        // Build payload and hand off
+        const attention = {
+            type: "pause-sampling",
+            side,
+            coordSpace: "normalised",
+            samples,
+            decisionAtMs: staged?.decisionAtMs ?? null,
+        };
+        cancelPauseSampling(); // tear down listeners/overlays
+        onDone(attention);
     };
 
     const pauseAndCollect = (tsMs) => {
+        if (!psActive || signal.aborted) return;
         chosenVideo.pause();
         showMultiPointCollector(side, (points) => {
+            if (signal.aborted) return;
             samples.push({ tsMs, points: points || [] });
-            currentIdx += 1;
-            if (currentIdx >= nextBreaks.length) {
-                // Finished all pauses; wait for video end or push last segment if needed
-                // If video already at/near end, submit now
+            idx += 1;
+            if (idx >= breaks.length) {
+                // Either we're at end already, or we need to coast to ended
                 if (chosenVideo.ended || chosenVideo.duration - chosenVideo.currentTime < 0.05) {
                     finish();
                 } else {
-                    // Resume to end, then finish in "ended" handler
+                    armed = false; // rely on 'ended' to finish
                     ensurePlaying();
                 }
             } else {
@@ -734,34 +754,25 @@ function startPauseSampling(side, onDone) {
     };
 
     const onTime = () => {
-        if (!armed || currentIdx >= nextBreaks.length) return;
+        if (!psActive || signal.aborted || !armed || idx >= breaks.length) return;
         const nowMs = Math.floor(chosenVideo.currentTime * 1000);
-        const target = nextBreaks[currentIdx];
+        const target = breaks[idx];
         if (nowMs >= target) {
             armed = false;
             pauseAndCollect(target);
         }
     };
 
-    const finish = () => {
-        chosenVideo.removeEventListener("timeupdate", onTime);
-        chosenVideo.removeEventListener("ended", finish);
-        // Construct attention payload
-        const attention = {
-            type: "pause-sampling",
-            side,
-            coordSpace: "normalised",
-            samples,
-            decisionAtMs: staged?.decisionAtMs ?? null,
-        };
-        onDone(attention);
-    };
-
-    chosenVideo.addEventListener("timeupdate", onTime);
-    chosenVideo.addEventListener("ended", finish);
+    chosenVideo.addEventListener("timeupdate", onTime, { signal });
+    chosenVideo.addEventListener(
+        "ended",
+        () => {
+            if (!signal.aborted) finish();
+        },
+        { signal }
+    );
 
     // Kick-off
-    armed = true;
     ensurePlaying();
 }
 
@@ -788,6 +799,9 @@ function handleChoice(response) {
 }
 
 async function loadNextPair() {
+    cancelPauseSampling();
+    document.getElementById("multiOverlay")?.remove();
+    document.getElementById("pointOverlay")?.remove();
     const res = await fetch(`${API_BASE}/clip-pairs?token=${token}`);
     if (!res.ok) {
         if (res.status === 403) {
@@ -809,29 +823,30 @@ async function loadNextPair() {
 }
 
 // For compatibility
-async function submitResponse(response, attention) {
-    const now = new Date();
-    const responseTimeMs = presentedTime ? now - presentedTime : undefined;
-    await fetch(`${API_BASE}/annotate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            token,
-            pairId: currentPair.pair_id,
-            response,
-            surpriseChoice: staged.surpriseChoice,
-            left: { url: currentPair.left_clip },
-            right: { url: currentPair.right_clip },
-            presentedTime,
-            responseTimeMs,
-            isGold: currentPair._meta?.isGold || false,
-            isRepeat: currentPair._meta?.isRepeat || false,
-            repeatOf: currentPair._meta?.repeatOf,
-            attention,
-        }),
-    });
-    loadNextPair();
-}
+// async function submitResponse(response, attention) {
+//     cancelPauseSampling();
+//     const now = new Date();
+//     const responseTimeMs = presentedTime ? now - presentedTime : undefined;
+//     await fetch(`${API_BASE}/annotate`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//             token,
+//             pairId: currentPair.pair_id,
+//             response,
+//             surpriseChoice: staged.surpriseChoice,
+//             left: { url: currentPair.left_clip },
+//             right: { url: currentPair.right_clip },
+//             presentedTime,
+//             responseTimeMs,
+//             isGold: currentPair._meta?.isGold || false,
+//             isRepeat: currentPair._meta?.isRepeat || false,
+//             repeatOf: currentPair._meta?.repeatOf,
+//             attention,
+//         }),
+//     });
+//     loadNextPair();
+// }
 
 window.onload = () => {
     loadNextPair();
@@ -840,6 +855,7 @@ window.onload = () => {
 };
 
 async function submitStagedAnnotation() {
+    cancelPauseSampling();
     // close current step timing
     if (staged) {
         const now = Date.now();
