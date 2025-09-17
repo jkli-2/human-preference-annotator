@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 const AttentionSchema = new mongoose.Schema(
     {
         side: { type: String, enum: ["left", "right"] },
-        type: { type: String, enum: ["point", "grid", "box"], default: undefined }, // extensible
+        type: {
+            type: String,
+            enum: ["point", "grid", "box", "pause-sampling"],
+            default: undefined,
+        },
         x: { type: Number, min: 0, max: 1 }, // normalised [0,1] when coordSpace === 'normalised'
         y: { type: Number, min: 0, max: 1 },
         coordSpace: {
@@ -11,6 +15,19 @@ const AttentionSchema = new mongoose.Schema(
             enum: ["normalised", "pixel", "cssPixels"],
             default: "normalised",
         },
+        // For "pause-sampling" mode
+        samples: [
+            {
+                tsMs: { type: Number, min: 0, required: true },
+                points: [
+                    {
+                        x: { type: Number, min: 0, max: 1, required: true },
+                        y: { type: Number, min: 0, max: 1, required: true },
+                    },
+                ],
+                _id: false,
+            },
+        ],
         decisionAtMs: Number,
     },
     { _id: false }
