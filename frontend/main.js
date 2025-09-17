@@ -8,6 +8,8 @@ if (!token) {
 }
 localStorage.setItem("token", token);
 const ATTN_TIMEOUT = 10000; // 10s
+// Pause-sampling config: default 1000 ms; override via ?ps=NNN
+const PAUSE_SAMPLE_MS = Math.max(200, Number(urlParams.get("ps") || 1000)); // clamp min 200ms
 
 function logout() {
     localStorage.removeItem("token");
@@ -22,6 +24,23 @@ let awaitingRegion = false;
 let pendingChoice = null;
 let decisionAtMs = null;
 let regionTimeoutId = null;
+
+// Pause-sampling (PS) lifecycle control
+let psAbort = null; // AbortController used to fence all PS listeners
+let psActive = false; // true while a PS session is in progress
+
+function cancelPauseSampling() {
+    // Abort all PS event listeners and reset flags/UI
+    try {
+        psAbort?.abort();
+    } catch (_) {}
+    psAbort = null;
+    psActive = false;
+    awaitingRegion = false;
+    // remove any lingering overlays
+    document.getElementById("multiOverlay")?.remove();
+    document.getElementById("pointOverlay")?.remove();
+}
 
 // 3-step annotation state (Preference, Surprise, Attention)
 const STEPS = { PREF: 0, SURPRISE: 1, ATTENTION: 2 };
@@ -246,46 +265,67 @@ function renderStepUI() {
         document.getElementById("surpriseNext").addEventListener("click", () => {
             if (canNext()) markStepAdvance(STEPS.ATTENTION);
         });
+        // } else if (step === STEPS.ATTENTION) {
+        //     buttons.innerHTML = `
+        //   <button id="markPointBtn">Mark attention on ${chosen === "left" ? "Up" : "Down"} (X)</button>
+        //   ${
+        //       requireRegion && (chosen === "left" || chosen === "right")
+        //           ? ""
+        //           : '<button id="submitNoPoint">Submit without point</button>'
+        //   }
+        // `;
+        //     const side = chosen;
+        //     const go = () => {
+        //         showPointOverlay(side, (pt) => {
+        //             if (pt) {
+        //                 staged.attention = {
+        //                     type: "point",
+        //                     side,
+        //                     x: pt.x,
+        //                     y: pt.y,
+        //                     coordSpace: "normalised",
+        //                     decisionAtMs: staged.decisionAtMs,
+        //                 };
+        //             } else {
+        //                 staged.attention = {
+        //                     type: "point",
+        //                     side,
+        //                     skipped: true,
+        //                     decisionAtMs: staged.decisionAtMs,
+        //                 };
+        //             }
+        //             submitStagedAnnotation();
+        //         });
+        //     };
+        //     document.getElementById("markPointBtn").addEventListener("click", go);
+        //     const skipBtn = document.getElementById("submitNoPoint");
+        //     if (skipBtn)
+        //         skipBtn.addEventListener("click", () => {
+        //             staged.attention = null;
+        //             submitStagedAnnotation();
+        //         });
+        //     if (requireRegion && (side === "left" || side === "right")) setTimeout(go, 50); // auto-open if required
+        // }
     } else if (step === STEPS.ATTENTION) {
+        const side = staged?.preference; // "left" | "right"
+        const label = side === "left" ? "Up" : "Down";
+        notes.innerHTML = `<p id="instructions">Replay in pause-sampling: we'll pause every <b>${PAUSE_SAMPLE_MS}ms</b>. Add <em>multiple</em> points at each stop, then press Space/Enter to continue.</p>`;
         buttons.innerHTML = `
-      <button id="markPointBtn">Mark attention on ${chosen === "left" ? "Up" : "Down"} (X)</button>
-      ${
-          requireRegion && (chosen === "left" || chosen === "right")
-              ? ""
-              : '<button id="submitNoPoint">Submit without point</button>'
-      }
+      <button id="startPS">Start pause-sampling on ${label}</button>
+      <button id="skipPS">Skip (no attention)</button>
     `;
-        const side = chosen;
-        const go = () => {
-            showPointOverlay(side, (pt) => {
-                if (pt) {
-                    staged.attention = {
-                        type: "point",
-                        side,
-                        x: pt.x,
-                        y: pt.y,
-                        coordSpace: "normalised",
-                        decisionAtMs: staged.decisionAtMs,
-                    };
-                } else {
-                    staged.attention = {
-                        type: "point",
-                        side,
-                        skipped: true,
-                        decisionAtMs: staged.decisionAtMs,
-                    };
-                }
-                submitStagedAnnotation();
+        document.getElementById("startPS").addEventListener("click", () => {
+            document.getElementById("startPS").disabled = true;
+            document.getElementById("skipPS").disabled = true;
+            startPauseSampling(side, (attention) => {
+                staged.attention = attention;
+                submitStagedAnnotation(); // auto-continue when done
             });
-        };
-        document.getElementById("markPointBtn").addEventListener("click", go);
-        const skipBtn = document.getElementById("submitNoPoint");
-        if (skipBtn)
-            skipBtn.addEventListener("click", () => {
-                staged.attention = null;
-                submitStagedAnnotation();
-            });
-        if (requireRegion && (side === "left" || side === "right")) setTimeout(go, 50); // auto-open if required
+        });
+        document.getElementById("skipPS").addEventListener("click", () => {
+            staged.attention = null;
+            submitStagedAnnotation();
+        });
     }
 }
 
@@ -537,6 +577,205 @@ function showPointOverlay(side, onPick) {
     }
 }
 
+/**
+ * showMultiPointCollector(side, onDone)
+ * - Lets user add multiple points on the chosen video frame.
+ * - Toolbar: Add by click/tap; Z to undo last; C to clear; Space/Enter to continue (finish this stop).
+ * - Returns array of {x,y} in normalised coords via onDone(points).
+ */
+function showMultiPointCollector(side, onDone) {
+    awaitingRegion = true;
+    const video = document.getElementById(side === "left" ? "leftVideo" : "rightVideo");
+    const wrap = video.parentElement;
+    wrap.style.position = wrap.style.position || "relative";
+
+    // Ensure only one overlay at a time
+    document.getElementById("multiOverlay")?.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = "multiOverlay";
+    overlay.style.position = "absolute";
+    overlay.style.inset = "0";
+    overlay.style.cursor = "crosshair";
+    overlay.style.zIndex = "10";
+    overlay.style.background = "rgba(0,0,0,0.10)";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-label", "Mark multiple points of interest");
+
+    // Toolbar
+    const bar = document.createElement("div");
+    bar.style.position = "absolute";
+    bar.style.left = "50%";
+    bar.style.bottom = "8px";
+    bar.style.transform = "translateX(-50%)";
+    bar.style.padding = "6px 10px";
+    bar.style.background = "rgba(0,0,0,0.65)";
+    bar.style.color = "#fff";
+    bar.style.borderRadius = "6px";
+    bar.style.font = "600 12px system-ui";
+    bar.textContent = "Click to add points | Z=Undo | C=Clear | Space/Enter=Next";
+    overlay.appendChild(bar);
+
+    const points = [];
+    const markers = [];
+    const addMarker = (x, y) => {
+        const m = document.createElement("div");
+        m.style.position = "absolute";
+        m.style.left = `${x * 100}%`;
+        m.style.top = `${y * 100}%`;
+        m.style.transform = "translate(-50%, -50%)";
+        m.style.width = "12px";
+        m.style.height = "12px";
+        m.style.borderRadius = "50%";
+        m.style.border = "2px solid #fff";
+        m.style.boxShadow = "0 1px 2px rgba(0,0,0,.6)";
+        m.style.pointerEvents = "none";
+        overlay.appendChild(m);
+        markers.push(m);
+    };
+
+    const click = (evt) => {
+        const { x, y } = getNormalisedCoords(evt, wrap);
+        points.push({ x, y });
+        addMarker(x, y);
+    };
+    const undo = () => {
+        points.pop();
+        const m = markers.pop();
+        if (m) m.remove();
+    };
+    const clearAll = () => {
+        points.length = 0;
+        while (markers.length) markers.pop().remove();
+    };
+    const finish = () => {
+        cleanup();
+        onDone(points.slice());
+    };
+    const onKey = (e) => {
+        if (e.key === "z" || e.key === "Z") {
+            e.preventDefault();
+            undo();
+        } else if (e.key === "c" || e.key === "C") {
+            e.preventDefault();
+            clearAll();
+        } else if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            finish();
+        } else if (e.key === "Escape") {
+            e.preventDefault();
+            finish();
+        }
+    };
+
+    overlay.addEventListener("click", click);
+    window.addEventListener("keydown", onKey);
+    wrap.appendChild(overlay);
+
+    function cleanup() {
+        window.removeEventListener("keydown", onKey);
+        overlay.remove();
+        awaitingRegion = false;
+    }
+}
+
+/**
+ * startPauseSampling(side, onDone)
+ * Pauses every N ms, collects multiple points per stop, resumes until end.
+ * All listeners are attached with an AbortController to guarantee teardown.
+ */
+function startPauseSampling(side, onDone) {
+    const chosenVideo = document.getElementById(side === "left" ? "leftVideo" : "rightVideo");
+    const otherVideo = document.getElementById(side === "left" ? "rightVideo" : "leftVideo");
+
+    // Ensure previous sessions are fully stopped
+    cancelPauseSampling();
+    psAbort = new AbortController();
+    const { signal } = psAbort;
+    psActive = true;
+
+    // Prepare playback
+    otherVideo.pause();
+    chosenVideo.loop = false;
+    chosenVideo.controls = false;
+    chosenVideo.currentTime = 0;
+    chosenVideo.muted = true;
+
+    const step = Math.max(200, Number(new URLSearchParams(location.search).get("ps") || 1000));
+    const durMs = () => Math.floor((chosenVideo.duration || 0) * 1000);
+    const breaks = [];
+    for (let t = step; t < durMs() + 50; t += step) breaks.push(t);
+
+    const samples = [];
+    let idx = 0;
+    let armed = true;
+
+    const ensurePlaying = async () => {
+        try {
+            await chosenVideo.play();
+        } catch (_) {}
+    };
+
+    const finish = () => {
+        if (!psActive) return;
+        psActive = false;
+        // Build payload and hand off
+        const attention = {
+            type: "pause-sampling",
+            side,
+            coordSpace: "normalised",
+            samples,
+            decisionAtMs: staged?.decisionAtMs ?? null,
+        };
+        cancelPauseSampling(); // tear down listeners/overlays
+        onDone(attention);
+    };
+
+    const pauseAndCollect = (tsMs) => {
+        if (!psActive || signal.aborted) return;
+        chosenVideo.pause();
+        showMultiPointCollector(side, (points) => {
+            if (signal.aborted) return;
+            samples.push({ tsMs, points: points || [] });
+            idx += 1;
+            if (idx >= breaks.length) {
+                // Either we're at end already, or we need to coast to ended
+                if (chosenVideo.ended || chosenVideo.duration - chosenVideo.currentTime < 0.05) {
+                    finish();
+                } else {
+                    armed = false; // rely on 'ended' to finish
+                    ensurePlaying();
+                }
+            } else {
+                armed = true;
+                ensurePlaying();
+            }
+        });
+    };
+
+    const onTime = () => {
+        if (!psActive || signal.aborted || !armed || idx >= breaks.length) return;
+        const nowMs = Math.floor(chosenVideo.currentTime * 1000);
+        const target = breaks[idx];
+        if (nowMs >= target) {
+            armed = false;
+            pauseAndCollect(target);
+        }
+    };
+
+    chosenVideo.addEventListener("timeupdate", onTime, { signal });
+    chosenVideo.addEventListener(
+        "ended",
+        () => {
+            if (!signal.aborted) finish();
+        },
+        { signal }
+    );
+
+    // Kick-off
+    ensurePlaying();
+}
+
 function handleChoice(response) {
     const leftVideo = document.getElementById("leftVideo");
     const rightVideo = document.getElementById("rightVideo");
@@ -560,6 +799,9 @@ function handleChoice(response) {
 }
 
 async function loadNextPair() {
+    cancelPauseSampling();
+    document.getElementById("multiOverlay")?.remove();
+    document.getElementById("pointOverlay")?.remove();
     const res = await fetch(`${API_BASE}/clip-pairs?token=${token}`);
     if (!res.ok) {
         if (res.status === 403) {
@@ -581,29 +823,30 @@ async function loadNextPair() {
 }
 
 // For compatibility
-async function submitResponse(response, attention) {
-    const now = new Date();
-    const responseTimeMs = presentedTime ? now - presentedTime : undefined;
-    await fetch(`${API_BASE}/annotate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            token,
-            pairId: currentPair.pair_id,
-            response,
-            surpriseChoice: staged.surpriseChoice,
-            left: { url: currentPair.left_clip },
-            right: { url: currentPair.right_clip },
-            presentedTime,
-            responseTimeMs,
-            isGold: currentPair._meta?.isGold || false,
-            isRepeat: currentPair._meta?.isRepeat || false,
-            repeatOf: currentPair._meta?.repeatOf,
-            attention,
-        }),
-    });
-    loadNextPair();
-}
+// async function submitResponse(response, attention) {
+//     cancelPauseSampling();
+//     const now = new Date();
+//     const responseTimeMs = presentedTime ? now - presentedTime : undefined;
+//     await fetch(`${API_BASE}/annotate`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({
+//             token,
+//             pairId: currentPair.pair_id,
+//             response,
+//             surpriseChoice: staged.surpriseChoice,
+//             left: { url: currentPair.left_clip },
+//             right: { url: currentPair.right_clip },
+//             presentedTime,
+//             responseTimeMs,
+//             isGold: currentPair._meta?.isGold || false,
+//             isRepeat: currentPair._meta?.isRepeat || false,
+//             repeatOf: currentPair._meta?.repeatOf,
+//             attention,
+//         }),
+//     });
+//     loadNextPair();
+// }
 
 window.onload = () => {
     loadNextPair();
@@ -612,6 +855,7 @@ window.onload = () => {
 };
 
 async function submitStagedAnnotation() {
+    cancelPauseSampling();
     // close current step timing
     if (staged) {
         const now = Date.now();

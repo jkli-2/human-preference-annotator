@@ -89,46 +89,49 @@ router.get("/admin/tokens", requireAdmin, (req, res) => {
 });
 
 router.get("/admin/export", requireAdmin, async (req, res) => {
-    const annotations = await Annotation.find({});
-    const output = annotations.map((a) => {
-        const att = a.attention || {};
-        const r = att.rect || {};
-        const attentionUrl =
-            att.side === "left"
-                ? a.left?.url || null
-                : att.side === "right"
-                ? a.right?.url || null
-                : null;
-        return {
-            annotator_id: a.annotatorId,
-            pair_id: a.pairId,
-            response: a.response,
-            surprise_choice: a.surpriseChoice || null,
-            left_url: a.left?.url || null,
-            right_url: a.right?.url || null,
-            left_surprise: Number.isFinite(a.left?.surprise) ? a.left.surprise : null,
-            right_surprise: Number.isFinite(a.right?.surprise) ? a.right.surprise : null,
-            is_gold: a.isGold || false,
-            gold_expected: a.goldExpected || null,
-            gold_correct: typeof a.goldCorrect === "boolean" ? a.goldCorrect : null,
-            is_repeat: a.isRepeat || false,
-            repeat_of: a.repeatOf || null,
-            presented_time: a.presentedTime || null,
-            response_time_ms: typeof a.responseTimeMs === "number" ? a.responseTimeMs : null,
+    // Always use lean docs for predictable JSON
+    const docs = await Annotation.find({}).lean();
+    return res.json(docs);
+    // const annotations = await Annotation.find({});
+    // const output = annotations.map((a) => {
+    //     const att = a.attention || {};
+    //     const r = att.rect || {};
+    //     const attentionUrl =
+    //         att.side === "left"
+    //             ? a.left?.url || null
+    //             : att.side === "right"
+    //             ? a.right?.url || null
+    //             : null;
+    //     return {
+    //         annotator_id: a.annotatorId,
+    //         pair_id: a.pairId,
+    //         response: a.response,
+    //         surprise_choice: a.surpriseChoice || null,
+    //         left_url: a.left?.url || null,
+    //         right_url: a.right?.url || null,
+    //         left_surprise: Number.isFinite(a.left?.surprise) ? a.left.surprise : null,
+    //         right_surprise: Number.isFinite(a.right?.surprise) ? a.right.surprise : null,
+    //         is_gold: a.isGold || false,
+    //         gold_expected: a.goldExpected || null,
+    //         gold_correct: typeof a.goldCorrect === "boolean" ? a.goldCorrect : null,
+    //         is_repeat: a.isRepeat || false,
+    //         repeat_of: a.repeatOf || null,
+    //         presented_time: a.presentedTime || null,
+    //         response_time_ms: typeof a.responseTimeMs === "number" ? a.responseTimeMs : null,
 
-            attention_type: att.type || null,
-            attention_side: att.side || null, // "left" | "right"
-            attention_x: Number.isFinite(att.x) ? att.x : null, // [0,1] if coordSpace === 'normalised'
-            attention_y: Number.isFinite(att.y) ? att.y : null,
-            attention_coord_space: att.coordSpace || (att.rect ? "normalised" : null),
-            attention_decision_ms: Number.isFinite(att.decisionAtMs) ? att.decisionAtMs : null,
-            attention_url: attentionUrl, // convenience: URL of the chosen-side video at decision time
+    //         attention_type: att.type || null,
+    //         attention_side: att.side || null, // "left" | "right"
+    //         attention_x: Number.isFinite(att.x) ? att.x : null, // [0,1] if coordSpace === 'normalised'
+    //         attention_y: Number.isFinite(att.y) ? att.y : null,
+    //         attention_coord_space: att.coordSpace || (att.rect ? "normalised" : null),
+    //         attention_decision_ms: Number.isFinite(att.decisionAtMs) ? att.decisionAtMs : null,
+    //         attention_url: attentionUrl, // convenience: URL of the chosen-side video at decision time
 
-            timestamp: a.timestamp,
-            stage_durations: a.stageDurations ? Object.fromEntries(a.stageDurations) : null,
-        };
-    });
-    res.json(output);
+    //         timestamp: a.timestamp,
+    //         stage_durations: a.stageDurations ? Object.fromEntries(a.stageDurations) : null,
+    //     };
+    // });
+    // res.json(output);
 });
 
 router.post("/admin/flush", requireAdmin, async (req, res) => {
@@ -258,12 +261,37 @@ router.post("/annotate", async (req, res) => {
                 if (Number.isFinite(attention.x)) attention.x = clamp01(attention.x);
                 if (Number.isFinite(attention.y)) attention.y = clamp01(attention.y);
             }
+            if (ATTENTION_RATE >= 1.0) {
+                if (!(Number.isFinite(attention.x) && Number.isFinite(attention.y))) {
+                    return res.status(400).json({ error: "attention point required" });
+                }
+            }
+        } else if (attention.type === "pause-sampling") {
+            if (!Array.isArray(attention.samples)) {
+                return res.status(400).json({ error: "attention.samples[] required" });
+            }
+            const clamp01 = (v) => Math.max(0, Math.min(1, Number(v)));
+            attention.coordSpace = attention.coordSpace || "normalised";
+            attention.samples = attention.samples
+                .filter((s) => s && Number.isFinite(s.tsMs) && s.tsMs >= 0)
+                .map((s) => ({
+                    tsMs: Math.round(s.tsMs),
+                    points: Array.isArray(s.points)
+                        ? s.points
+                              .filter((p) => p && Number.isFinite(p.x) && Number.isFinite(p.y))
+                              .map((p) => ({
+                                  x: clamp01(p.x),
+                                  y: clamp01(p.y),
+                              }))
+                        : [],
+                }));
+            // Note: empty points per sample and empty samples array (annotator skipped all) are allowed.
         }
-        // else if (attention.type === "box") {}
     }
 
     // Validation
     if (response !== "cant_tell") {
+        // left or right
         // if (!surpriseChoice) {
         //     return res
         //         .status(400)
@@ -276,18 +304,6 @@ router.post("/annotate", async (req, res) => {
         //         .json({ error: "left.surprise and right.surprise (1..5) are required" });
         // }
         // Optionally require attention point when attention is "on" for all pairs
-        if (ATTENTION_RATE >= 1.0) {
-            if (
-                !(
-                    attention &&
-                    attention.type === "point" &&
-                    Number.isFinite(attention.x) &&
-                    Number.isFinite(attention.y)
-                )
-            ) {
-                return res.status(400).json({ error: "attention point required" });
-            }
-        }
     } else {
         // cant_tell: missing surprises/attention is allowed.
     }
