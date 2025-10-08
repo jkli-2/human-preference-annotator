@@ -1,5 +1,5 @@
 #!/bin/bash
-INPUT_DIR="output_42_routes"
+INPUT_DIR="frontend/videos/early_late_mi_training"
 OUTPUT_DIR="$INPUT_DIR/converted"
 
 mkdir -p "$OUTPUT_DIR"
